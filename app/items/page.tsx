@@ -115,7 +115,7 @@ export default function ItemList() {
               <Th>Description</Th>
               <Th>Action</Th>
               <Th>Action</Th>
-              <Th>Action</Th>
+              {/* <Th>Action</Th> */}
             </Tr>
           </Thead>
           <Tbody>
@@ -142,7 +142,7 @@ export default function ItemList() {
                     Delete
                   </Button>
                 </Td>
-                <Td>
+                {/* <Td>
                   <Button
                     colorScheme="red"
                     size="sm"
@@ -150,7 +150,7 @@ export default function ItemList() {
                   >
                     Edit
                   </Button>
-                </Td>
+                </Td> */}
               </Tr>
             ))}
           </Tbody>
