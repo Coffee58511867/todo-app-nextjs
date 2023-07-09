@@ -16,5 +16,13 @@ export const instance2 = axios.create({
     "Access-Control-Allow-Origin": "*",
   },
 });
+export const todoinstance = axios.create({
+  baseURL: "https://ionic-testing.onrender.com/",
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
+});
 
 export default instance;
