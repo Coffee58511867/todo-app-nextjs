@@ -14,6 +14,9 @@ import { useForm } from "react-hook-form";
 import IItem from "@/app/models/item.type";
 import { todoinstance } from "@/app/endpoint/api";
 import { uploadError } from "@/app/Validators/FormValidator";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function UpdateItem() {
   const {
@@ -22,15 +25,37 @@ export default function UpdateItem() {
     formState: { errors, isSubmitting },
   } = useForm<IItem>();
 
+  const router = useRouter();
+
+  const [item, setItem] = useState<IItem[]>([]);
+  const params = useParams();
+  const id = params.update?.toString();
+  console.log(id);
+
+  // useEffect(() => {
+  
+  //   const fetchItem = async () => {
+  //    await todoinstance.get(`/api/v1/items/${id}`).then((res) => {
+  //     setItem(res.data);
+  //     console.log(res.data);
+  //    })
+  //   }
+  //   fetchItem();
+  // }, [id])
+
   const onSubmit = async (data: IItem) => {
     try {
-      await todoinstance.post("/api/v1/items/addItem", data).then((response) => {
+      await todoinstance.put(`/api/v1/items/${id}`, data).then((response) => {
         console.log(response.data);
+        router.push("/items");
+        
      })
     } catch (error) {
       console.log(error);
     }
   };
+  
+
   return (
     <Flex
       minH={"100vh"}
