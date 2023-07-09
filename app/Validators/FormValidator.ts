@@ -46,6 +46,9 @@ export const uploadError = {
       body : {
         required: "Body is required",
       },
+     description : {
+        required: "Body is required",
+      },
   };
 
 
