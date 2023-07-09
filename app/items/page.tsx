@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import IItem from "../models/item.type";
 import { todoinstance } from "../endpoint/api";
+import { useRouter } from "next/navigation";
 import {
   TableContainer,
   Table,
@@ -16,6 +17,7 @@ import {
 export default function ItemList() {
   const [items, setItems] = useState<IItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -41,6 +43,14 @@ export default function ItemList() {
     }
   };
 
+  const handleUpdate = (itemId: string) => {
+    router.push(`/items/update/${itemId}`);
+  };
+
+  const handleAddItem = () => {
+    router.push("/items/addItem");
+  }
+
   if (loading) {
     return <h1>Loading....................</h1>;
   } else if (!items) {
@@ -48,7 +58,9 @@ export default function ItemList() {
   }
   return (
     <TableContainer>
-      <Button colorScheme="teal" size="sm" style={{padding: 10}}>
+      <Button colorScheme="teal" 
+      onClick={() => handleAddItem()}
+      size="sm" style={{padding: 10}}>
         Add New Item
       </Button>
       <Table size="sm">
@@ -68,7 +80,9 @@ export default function ItemList() {
               <Td>{item.title}</Td>
               <Td>{item.description}</Td>
               <Td>
-                <Button colorScheme="teal" size="sm">
+                <Button colorScheme="teal"
+                 onClick={() => handleUpdate(item._id)}
+                size="sm">
                   Update
                 </Button>
               </Td>
