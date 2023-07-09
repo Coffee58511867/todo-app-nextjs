@@ -3,6 +3,8 @@
 import React from "react";
 import {
   Box,
+  Button,
+  Stack,
   Table,
   TableContainer,
   Tbody,
@@ -11,6 +13,8 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 async function getData() {
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -22,9 +26,31 @@ async function getData() {
 }
 
 export default async function Home() {
+  const router = useRouter();
   const data = await getData();
+
+  const handleSubmit = async () => {
+    try {
+      router.push("/items");
+      console.log("Clicked Me");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <Box>
+    <Box p={10}>
+      <Stack padding={5}>
+        <Button
+          colorScheme="blue"
+          type="submit"
+          onClick={() => handleSubmit()}
+          size="sm"
+        >
+          Go to Dashboard
+        </Button>
+        <Link href="/items">Go to Dashboard</Link>
+      </Stack>
+
       <TableContainer>
         <Table>
           <Thead>

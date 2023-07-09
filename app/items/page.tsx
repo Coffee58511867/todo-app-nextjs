@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState, useRef } from "react";
 import React from "react";
@@ -26,6 +26,8 @@ import {
   ModalOverlay,
   useDisclosure,
   Box,
+  Spinner,
+  Center,
 } from "@chakra-ui/react";
 
 export default function ItemList() {
@@ -76,28 +78,40 @@ export default function ItemList() {
     router.push("/items/addItem");
   };
 
- const handleSave =   async() => {
+  const handleSave = async () => {
     try {
-        // await todoinstance.put(`/api/v1/items/${selectedItem._id}`, {
-        //   title: initialRef.current.value,
-        //   description: finalRef.current.value,
-        // });
-        console.log("Item updated successfully!");
-      } catch (error) {
-        console.log(error);
-      }
-      onClose();
+      // await todoinstance.put(`/api/v1/items/${selectedItem._id}`, {
+      //   title: initialRef.current.value,
+      //   description: finalRef.current.value,
+      // });
+      console.log("Item updated successfully!");
+    } catch (error) {
+      console.log(error);
+    }
+    onClose();
     onClose();
   };
 
   if (loading) {
-    return <h1>Loading....................</h1>;
+    return (
+      <Center style={{ padding: 20 }}>
+        <Spinner
+          size="lg"
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          padding={5}
+        />
+        <h1>Loading....................</h1>
+      </Center>
+    );
   } else if (!items) {
     return <h1>No data available</h1>;
   }
 
   return (
-    <Box>
+    <Box p={10}>
       <TableContainer>
         <Button
           colorScheme="teal"
