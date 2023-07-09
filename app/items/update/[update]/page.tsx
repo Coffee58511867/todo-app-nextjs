@@ -15,8 +15,13 @@ import IItem from "@/app/models/item.type";
 import { todoinstance } from "@/app/endpoint/api";
 import { uploadError } from "@/app/Validators/FormValidator";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
+const initialValues = {
+  title: "",
+  description: "",
+};
 
 export default function UpdateItem() {
   const {
@@ -27,21 +32,26 @@ export default function UpdateItem() {
 
   const router = useRouter();
 
-  const [item, setItem] = useState<IItem[]>([]);
+  const [item, setItem] = useState(initialValues);
   const params = useParams();
   const id = params.update?.toString();
-  console.log(id);
 
-  // useEffect(() => {
+  useEffect(() => {
   
-  //   const fetchItem = async () => {
-  //    await todoinstance.get(`/api/v1/items/${id}`).then((res) => {
-  //     setItem(res.data);
-  //     console.log(res.data);
-  //    })
-  //   }
-  //   fetchItem();
-  // }, [id])
+    const fetchItem = async () => {
+     await todoinstance.get(`/api/v1/items/update/${id}`).then((res) => {
+      setItem(res.data.item);
+      console.log(res.data.item);
+     })
+    }
+    fetchItem();
+  }, [id]);
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setItem({ ...item, [name]: value });
+  };
+  
 
   const onSubmit = async (data: IItem) => {
     try {
@@ -76,7 +86,9 @@ export default function UpdateItem() {
                   <FormLabel>Title</FormLabel>
                   <Input
                     placeholder="Title"
+                    value={item?.title}
                     {...register("title", uploadError.title)}
+                    onChange={handleInputChange}
                   />
                   {errors?.title && (
                     <p className="error">{errors.title.message}</p>
@@ -86,7 +98,9 @@ export default function UpdateItem() {
                   <FormLabel>Description</FormLabel>
                   <Input
                     placeholder="Description"
+                    value={item.description}                
                     {...register("description", uploadError.body)}
+                    onChange={handleInputChange}
                   />
                   {errors?.description && (
                     <p className="error">{errors.description.message}</p>
