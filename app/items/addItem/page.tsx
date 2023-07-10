@@ -9,6 +9,7 @@ import {
   Stack,
   useColorModeValue,
   Box,
+  Heading,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import IItem from "@/app/models/item.type";
@@ -46,6 +47,11 @@ export default function AddItem() {
               boxShadow={"lg"}
               p={8}
             >
+              <Stack align={"center"} mb={{ base: 10 }}>
+              <Heading fontSize={{ base: "xl", md: "4xl" }}>
+               Add New Item To List
+              </Heading>
+            </Stack>
               <Stack spacing={4} py={13}>
                 <FormControl isRequired>
                   <FormLabel>Title</FormLabel>
