@@ -27,8 +27,9 @@ import {
   useDisclosure,
   Box,
   Spinner,
-  Center,
+  Flex,
   Stack,
+  CircularProgress,
 } from "@chakra-ui/react";
 
 function ItemList() {
@@ -36,8 +37,6 @@ function ItemList() {
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState<IItem>();
   const router = useRouter();
-
- 
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -108,17 +107,24 @@ function ItemList() {
 
   if (loading) {
     return (
-      <Center style={{ padding: 20 }}>
-        <Spinner
+      <Flex align={"center"} justify={"center"} minH={"100vh"}>
+        {/* <Spinner
           size="lg"
           thickness="4px"
           speed="0.65s"
           emptyColor="gray.200"
           color="blue.500"
           padding={5}
+        /> */}
+
+        <CircularProgress
+          isIndeterminate
+          color="green.300"
+          value={59}
+          size="100px"
+          thickness="6px"
         />
-        <h1>Loading....................</h1>
-      </Center>
+      </Flex>
     );
   } else if (!items) {
     return <h1>No data available</h1>;

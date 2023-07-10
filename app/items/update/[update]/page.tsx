@@ -9,6 +9,7 @@ import {
   Stack,
   useColorModeValue,
   Box,
+  Heading,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import IItem from "@/app/models/item.type";
@@ -37,13 +38,12 @@ function UpdateItem() {
   const id = params.update?.toString();
 
   useEffect(() => {
-  
     const fetchItem = async () => {
-     await todoinstance.get(`/api/v1/items/update/${id}`).then((res) => {
-      setItem(res.data.item);
-      console.log(res.data.item);
-     })
-    }
+      await todoinstance.get(`/api/v1/items/update/${id}`).then((res) => {
+        setItem(res.data.item);
+        console.log(res.data.item);
+      });
+    };
     fetchItem();
   }, [id]);
 
@@ -51,20 +51,17 @@ function UpdateItem() {
     const { name, value } = e.target;
     setItem({ ...item, [name]: value });
   };
-  
 
   const onSubmit = async (data: IItem) => {
     try {
       await todoinstance.put(`/api/v1/items/${id}`, data).then((response) => {
         console.log(response.data);
         router.push("/items");
-        
-     })
+      });
     } catch (error) {
       console.log(error);
     }
   };
-  
 
   return (
     <Flex
@@ -75,51 +72,55 @@ function UpdateItem() {
     >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
-            <Box
-              rounded={"lg"}
-              bg={useColorModeValue("white", "gray.700")}
-              boxShadow={"lg"}
-              p={8}
-            >
-              <Stack spacing={4} py={13}>
-                <FormControl isRequired>
-                  <FormLabel>Title</FormLabel>
-                  <Input
-                    placeholder="Title"
-                    value={item?.title}
-                    {...register("title", uploadError.title)}
-                    onChange={handleInputChange}
-                  />
-                  {errors?.title && (
-                    <p className="error">{errors.title.message}</p>
-                  )}
-                </FormControl>
-                <FormControl isRequired>
-                  <FormLabel>Description</FormLabel>
-                  <Input
-                    placeholder="Description"
-                    value={item.description}                
-                    {...register("description", uploadError.body)}
-                    onChange={handleInputChange}
-                  />
-                  {errors?.description && (
-                    <p className="error">{errors.description.message}</p>
-                  )}
-                </FormControl>
-                <Button
-                  size="lg"
-                  colorScheme="facebook"
-                  type="submit"
-                  loadingText="Submitting"
-                  isLoading={isSubmitting}
-                >
-                  Update
-                </Button>
-              </Stack>
-            </Box>
+          <Box
+            rounded={"lg"}
+            bg={useColorModeValue("white", "gray.700")}
+            boxShadow={"lg"}
+            p={8}
+          >
+            <Stack align={"center"} mb={{ base: 10 }}>
+              <Heading fontSize={{ base: "xl", md: "4xl" }}>
+                Update Item
+              </Heading>
+            </Stack>
+            <Stack spacing={4} py={13}>
+              <FormControl isRequired>
+                <FormLabel>Title</FormLabel>
+                <Input
+                  placeholder="Title"
+                  value={item?.title}
+                  {...register("title", uploadError.title)}
+                  onChange={handleInputChange}
+                />
+                {errors?.title && (
+                  <p className="error">{errors.title.message}</p>
+                )}
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel>Description</FormLabel>
+                <Input
+                  placeholder="Description"
+                  value={item.description}
+                  {...register("description", uploadError.body)}
+                  onChange={handleInputChange}
+                />
+                {errors?.description && (
+                  <p className="error">{errors.description.message}</p>
+                )}
+              </FormControl>
+              <Button
+                size="lg"
+                colorScheme="facebook"
+                type="submit"
+                loadingText="Submitting"
+                isLoading={isSubmitting}
+              >
+                Update
+              </Button>
+            </Stack>
+          </Box>
         </form>
       </Stack>
-
     </Flex>
   );
 }
