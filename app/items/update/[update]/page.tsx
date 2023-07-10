@@ -17,13 +17,14 @@ import { uploadError } from "@/app/Validators/FormValidator";
 import { useParams } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import withAuth from "@/app/withAuth/page";
 
 const initialValues = {
   title: "",
   description: "",
 };
 
-export default function UpdateItem() {
+function UpdateItem() {
   const {
     register,
     handleSubmit,
@@ -123,3 +124,5 @@ export default function UpdateItem() {
     </Flex>
   );
 }
+
+export default withAuth(UpdateItem);

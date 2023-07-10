@@ -13,20 +13,24 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import IItem from "@/app/models/item.type";
+import { useRouter } from "next/navigation";
 import { todoinstance } from "@/app/endpoint/api";
 import { uploadError } from "@/app/Validators/FormValidator";
+import withAuth from "@/app/withAuth/page";
 
-export default function AddItem() {
+function AddItem() {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<IItem>();
 
+  const router = useRouter();
+
   const onSubmit = async (data: IItem) => {
     try {
       await todoinstance.post("/api/v1/items/addItem", data).then((response) => {
-        console.log(response.data);
+       router.push("/items");
      })
     } catch (error) {
       console.log(error);
@@ -90,3 +94,4 @@ export default function AddItem() {
     </Flex>
   );
 }
+export default withAuth(AddItem);
