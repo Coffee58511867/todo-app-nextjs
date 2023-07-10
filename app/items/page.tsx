@@ -30,11 +30,15 @@ import {
   Center,
 } from "@chakra-ui/react";
 
+const token = localStorage.getItem("token");
+
 export default function ItemList() {
   const [items, setItems] = useState<IItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState<IItem>();
   const router = useRouter();
+
+  console.log(token);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
