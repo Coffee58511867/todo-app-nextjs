@@ -28,9 +28,10 @@ import {
   Box,
   Spinner,
   Center,
+  Stack,
 } from "@chakra-ui/react";
 
-const token = localStorage.getItem("token");
+
 
 export default function ItemList() {
   const [items, setItems] = useState<IItem[]>([]);
@@ -38,7 +39,7 @@ export default function ItemList() {
   const [selectedItem, setSelectedItem] = useState<IItem>();
   const router = useRouter();
 
-  console.log(token);
+ 
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -46,6 +47,8 @@ export default function ItemList() {
   const finalRef = useRef(null);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log(token);
     const fetchItems = async () => {
       try {
         await todoinstance.get("/api/v1/items").then((response) => {
@@ -82,6 +85,15 @@ export default function ItemList() {
     router.push("/items/addItem");
   };
 
+  const handleLogout = async () => {
+    try {
+      localStorage.removeItem("token");
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSave = async () => {
     try {
       // await todoinstance.put(`/api/v1/items/${selectedItem._id}`, {
@@ -116,15 +128,15 @@ export default function ItemList() {
 
   return (
     <Box p={10}>
-      <TableContainer>
-        <Button
-          colorScheme="teal"
-          onClick={() => handleAddItem()}
-          size="sm"
-          style={{ padding: 10 }}
-        >
+      <Stack p={5}>
+        <Button colorScheme="teal" onClick={() => handleAddItem()} size="sm">
           Add New Item
         </Button>
+        <Button colorScheme="teal" onClick={() => handleLogout()} size="sm">
+          Logout
+        </Button>
+      </Stack>
+      <TableContainer>
         <Table size="sm">
           <Thead>
             <Tr>
