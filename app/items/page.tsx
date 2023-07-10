@@ -30,6 +30,7 @@ import {
   Flex,
   Stack,
   CircularProgress,
+  Heading,
 } from "@chakra-ui/react";
 
 function ItemList() {
@@ -127,7 +128,11 @@ function ItemList() {
       </Flex>
     );
   } else if (!items) {
-    return <h1>No data available</h1>;
+    return (
+      <Flex align={"center"} justify={"center"} minH={"100vh"}>
+        <Heading>No Data Available</Heading>
+      </Flex>
+    )
   }
 
   return (
