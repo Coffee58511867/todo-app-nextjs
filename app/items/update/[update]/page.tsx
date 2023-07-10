@@ -17,7 +17,6 @@ import { uploadError } from "@/app/Validators/FormValidator";
 import { useParams } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import withAuth from "@/app/withAuth/page";
 
 const initialValues = {
   title: "",
@@ -125,4 +124,4 @@ function UpdateItem() {
   );
 }
 
-export default withAuth(UpdateItem);
+export default UpdateItem;

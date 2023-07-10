@@ -16,7 +16,6 @@ import IItem from "@/app/models/item.type";
 import { useRouter } from "next/navigation";
 import { todoinstance } from "@/app/endpoint/api";
 import { uploadError } from "@/app/Validators/FormValidator";
-import withAuth from "@/app/withAuth/page";
 
 function AddItem() {
   const {
@@ -94,4 +93,4 @@ function AddItem() {
     </Flex>
   );
 }
-export default withAuth(AddItem);
+export default AddItem;

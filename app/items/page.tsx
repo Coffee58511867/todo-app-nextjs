@@ -30,9 +30,6 @@ import {
   Center,
   Stack,
 } from "@chakra-ui/react";
-import withAuth from "../withAuth/page";
-
-
 
 function ItemList() {
   const [items, setItems] = useState<IItem[]>([]);
@@ -230,4 +227,4 @@ function ItemList() {
     </Box>
   );
 }
-export default withAuth(ItemList);
+export default ItemList;

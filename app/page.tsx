@@ -75,7 +75,7 @@
 //   );
 // }
 
-"use client"
+"use client";
 
 import {
   Flex,
@@ -112,18 +112,22 @@ export default function Signin() {
   const onSubmit = async (data: IUserRegiter) => {
     try {
       console.log(data);
-      await todoinstance.post("/api/v1/users/login", data).then((responce)=> {
+      await todoinstance.post("/api/v1/users/login", data).then((responce) => {
         console.log(responce.data.status);
-        if(responce.data.status === 'ok'){
+        if (responce.data.status === "ok") {
           console.log(responce.data);
-          alert("Login Successfully");
           localStorage.setItem("token", responce.data.data);
           router.push("/items");
+        } else {
+          toast({
+            title: "Access denied.",
+            description: "wrong username or password",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
         }
-        else{
-          alert(" Email or Password is wrong");
-        }
-      })
+      });
     } catch (error) {
       console.log(error);
     }
@@ -209,4 +213,3 @@ export default function Signin() {
     </Flex>
   );
 }
-
