@@ -112,17 +112,18 @@ export default function Signin() {
   const onSubmit = async (data: IUserRegiter) => {
     try {
       console.log(data);
-      const responce = todoinstance.post("/api/v1/users/login", data);
-      console.log((await responce).data.status);
-      if((await responce).data.status === 'ok'){
-        console.log((await responce).data);
-        alert("Login Successfully");
-        localStorage.setItem("token", (await responce).data.data);
-        router.push("/items");
-      }
-      else{
-        alert(" Email or Password is wrong");
-      }
+      await todoinstance.post("/api/v1/users/login", data).then((responce)=> {
+        console.log(responce.data.status);
+        if(responce.data.status === 'ok'){
+          console.log(responce.data);
+          alert("Login Successfully");
+          localStorage.setItem("token", responce.data.data);
+          router.push("/items");
+        }
+        else{
+          alert(" Email or Password is wrong");
+        }
+      })
     } catch (error) {
       console.log(error);
     }
