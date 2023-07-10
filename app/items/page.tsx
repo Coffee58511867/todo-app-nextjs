@@ -30,10 +30,11 @@ import {
   Center,
   Stack,
 } from "@chakra-ui/react";
+import withAuth from "../withAuth/page";
 
 
 
-export default function ItemList() {
+function ItemList() {
   const [items, setItems] = useState<IItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState<IItem>();
@@ -229,3 +230,4 @@ export default function ItemList() {
     </Box>
   );
 }
+export default withAuth(ItemList);
