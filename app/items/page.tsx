@@ -32,6 +32,7 @@ import {
   CircularProgress,
   Heading,
 } from "@chakra-ui/react";
+import axios from "axios";
 
 function ItemList() {
   const [items, setItems] = useState<IItem[]>([]);
@@ -49,7 +50,7 @@ function ItemList() {
     console.log(token);
     const fetchItems = async () => {
       try {
-        await todoinstance.get("/api/v1/items").then((response) => {
+        await todoinstance.get("/api/v1/items", {headers: {Authorization : `Bearer ${token}`}}).then((response) => {
           setItems(response.data);
           console.log(response.data);
           setLoading(false);
@@ -85,6 +86,7 @@ function ItemList() {
 
   const handleLogout = async () => {
     try {
+      localStorage.clear();
       localStorage.removeItem("token");
       router.push("/");
     } catch (error) {

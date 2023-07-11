@@ -13,6 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>To Do App</title>
+      </head>
       <body className={inter.className}>
         <ChakraProvider>{children}</ChakraProvider>
       </body>
