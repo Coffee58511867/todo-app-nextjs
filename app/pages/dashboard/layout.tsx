@@ -39,10 +39,10 @@ export default function DashboardLayout({
   return (
     <main>
       <header>
-        <Link href='/dashboard'>
+        <Link href='/pages/dashboard'>
           Dashboard
         </Link>
-        <Link href='/dashboard/settings'>
+        <Link href='/pages/dashboard/settings'>
           Settings
         </Link>
       </header>
