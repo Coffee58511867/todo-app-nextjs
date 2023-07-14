@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import IItem from "@/app/interfaces/Item";
+import IItem from "@/interfaces/Item";
 
 const TopicSchema: Schema = new Schema(
   {
