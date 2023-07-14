@@ -5,19 +5,19 @@ const TopicSchema: Schema = new Schema(
   {
     title: {
       type: String,
-      required: [true, "Please provide a first name"],
+      required: [true, "Please provide a title of topic"],
     },
     description: {
       type: String,
-      required: [true, "Please provide a surname"],
+      required: [true, "Please provide a description"],
     },
-   },
+  },
   {
     timestamps: true,
   }
 );
 
-export default mongoose.model<IItem>(
-  "TOPICS",
- TopicSchema
-);
+
+const Topic = mongoose.models.Topics || mongoose.model<IItem>("Topics", TopicSchema);
+
+export default Topic;
