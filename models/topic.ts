@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import IItem from "@/interfaces/Item";
+import ITopic from "@/interfaces/Item";
 
 const TopicSchema: Schema = new Schema(
   {
@@ -18,6 +18,6 @@ const TopicSchema: Schema = new Schema(
 );
 
 
-const Topic = mongoose.models.Topics || mongoose.model<IItem>("Topics", TopicSchema);
+const Topic = mongoose.models.Topics || mongoose.model<ITopic>("Topics", TopicSchema);
 
 export default Topic;
