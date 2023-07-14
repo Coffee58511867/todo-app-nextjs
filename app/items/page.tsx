@@ -61,7 +61,7 @@ function ItemList() {
     };
     const fetchTopics = async () => {
       try {
-        await axios.get("http://localhost:3000/api/topics/").then((response) => {
+        await axios.get("https://todo-app-2023-nine.vercel.app/api/topics/").then((response) => {
           console.log(response.data);       
         });
       } catch (error) {
