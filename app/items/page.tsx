@@ -59,7 +59,17 @@ function ItemList() {
         console.log(error);
       }
     };
+    const fetchTopics = async () => {
+      try {
+        await axios.get("http://localhost:3000/api/topics/").then((response) => {
+          console.log(response.data);       
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchItems();
+    fetchTopics();
   }, []);
 
   const handleDelete = async (itemId: string) => {
