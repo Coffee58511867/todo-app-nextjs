@@ -8,10 +8,10 @@ const MAX_AGE = 60 * 60 * 24 * 30 ; // DAYS
 export async function POST(request: Request) {
   const body = await request.json();
 
-  const { username, password } = body;
+  const { emailAddress, password } = body;
   await connectMongoDB();
 
-  if(username !== 'admin' || password !== 'admin' ){
+  if(emailAddress !== 'admin@gmail.com' || password !== 'admin' ){
     return NextResponse.json({
         message : 'Unauthorized'
     },
@@ -23,7 +23,7 @@ export async function POST(request: Request) {
   const secret = process.env.JWT_SECRET || ' ';
   const token = sign(
     {
-        username,
+        emailAddress,
     },
     secret, {
         expiresIn : MAX_AGE

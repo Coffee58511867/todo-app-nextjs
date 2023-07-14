@@ -15,11 +15,11 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     return NextResponse.json(
-        { message: "Topic not Created", error },
-        {
-          status: 400,
-        }
-      );
+      { message: "Topic not Created", error },
+      {
+        status: 400,
+      }
+    );
   }
 }
 
