@@ -39,17 +39,24 @@ export default function Signin() {
       console.log(data);
       const response = await axios.post("/api/auth/v1/login", data);
       console.log(response.data);
-      console.log(response.data.token);
-      const  tk  = response.data.token;
+
+      const tk = response.data.token;
       console.log(tk);
-    
-    // Decode the token to get the user ID
-    const decodedToken: any = jwtDecode(tk);
-    const userId = decodedToken.userId;
-    console.log("User ID:", userId);
+
+      // Decode the token to get the user ID
+      const decodedToken: any = jwtDecode(tk);
+      const userId = decodedToken.userId;
+      console.log("User ID:", userId);
       router.push("/pages/dashboard");
     } catch (error) {
       console.log(error);
+      toast({
+        title: "Access denied.",
+        description: "wrong username or password",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
 
