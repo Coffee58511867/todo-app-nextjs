@@ -36,7 +36,7 @@ export default function Signin() {
     try {
       console.log(data);
       const response = await axios.post("/api/auth/v1/login", data);
-      console.log(response);
+      console.log(response.data.data);
       router.push("/pages/dashboard");
     } catch (error) {
       console.log(error);

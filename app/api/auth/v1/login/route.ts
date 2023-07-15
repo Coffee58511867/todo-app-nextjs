@@ -3,6 +3,7 @@ import User from "@/models/user";
 import { sign } from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
 import { compare } from 'bcryptjs'
+import { serialize } from "cookie";
 
 const MAX_AGE = 60 * 60 * 24 * 30; // 30 days
 
@@ -36,13 +37,32 @@ export async function POST(request: Request) {
         expiresIn: MAX_AGE,
       }
     );
-
-    return NextResponse.json(
-      { success: true, message: "User logged in successfully", token },
-      {
+    const seralized = serialize("OurSideJWT", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: MAX_AGE,
+        path: "/",
+      });
+    
+      const response = {
+        message: "Authenticated",
+        data: token
+      };
+    
+      return new Response(JSON.stringify(response), {
         status: 200,
-      }
-    );
+        headers: {
+          "Set-Cookie": seralized,
+        },
+      });
+
+    // return NextResponse.json(
+    //   { success: true, message: "User logged in successfully", token },
+    //   {
+    //     status: 200,
+    //   }
+    // );
   } else {
     return NextResponse.json(
       { error: "Invalid credentials" },
