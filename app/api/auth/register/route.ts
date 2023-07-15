@@ -1,6 +1,7 @@
 import connectMongoDB from "@/lib/mongodb";
 import User from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
+import { hash } from "bcryptjs"
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -17,8 +18,7 @@ export async function POST(request: Request) {
         status: 409,
       }
     );
-  }
-   else {
+  } else {
     if (password.length < 6) {
       return NextResponse.json(
         { error: "Password should be 6 characters long" },
@@ -29,21 +29,26 @@ export async function POST(request: Request) {
     }
   }
 
+  const hashedPassword = await hash(password, 12)
+
   await User.create({
     fullName,
     emailAddress,
-    password,
+    password : hashedPassword,
   });
+
   try {
     return NextResponse.json(
-      { message: "User registered" },
+      { success: true, 
+        message: "User registered",
+    },
       {
         status: 201,
       }
     );
   } catch (error) {
     return NextResponse.json(
-      { message: "User not Created", error },
+      { success: false, message: "User not Created", error },
       {
         status: 400,
       }
