@@ -23,6 +23,7 @@ import { uploadError } from "../Validators/FormValidator";
 import IUserRegiter from "../models/admin.type";
 import axios from "axios";
 import { verify } from "jsonwebtoken";
+import jwtDecode from "jwt-decode";
 
 export default function Signin() {
   const toast = useToast();
@@ -40,7 +41,12 @@ export default function Signin() {
       console.log(response.data);
       console.log(response.data.token);
       const  tk  = response.data.token;
-      // const decodedToken = verify(tk, "WECHVCYUJH226325"); 
+      console.log(tk);
+    
+    // Decode the token to get the user ID
+    const decodedToken: any = jwtDecode(tk);
+    const userId = decodedToken.userId;
+    console.log("User ID:", userId);
       router.push("/pages/dashboard");
     } catch (error) {
       console.log(error);
