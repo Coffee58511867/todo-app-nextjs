@@ -14,7 +14,6 @@ export async function POST(request: Request) {
   await connectMongoDB();
 
   const userExists = await User.findOne({ emailAddress }).select("+password");
-  console.log(userExists._id);
   
   if (!userExists) {
     return NextResponse.json(
@@ -32,7 +31,7 @@ export async function POST(request: Request) {
     const token = sign(
       {
         emailAddress: userExists.emailAddress,
-        id: userExists._id,
+        userId: userExists._id,
       },
       secret,
       {

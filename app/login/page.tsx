@@ -22,6 +22,7 @@ import "../styles/Errors.css";
 import { uploadError } from "../Validators/FormValidator";
 import IUserRegiter from "../models/admin.type";
 import axios from "axios";
+import { verify } from "jsonwebtoken";
 
 export default function Signin() {
   const toast = useToast();
@@ -38,7 +39,8 @@ export default function Signin() {
       const response = await axios.post("/api/auth/v1/login", data);
       console.log(response.data);
       console.log(response.data.token);
-      // const { token } = response.data.token;
+      const  tk  = response.data.token;
+      // const decodedToken = verify(tk, "WECHVCYUJH226325"); 
       router.push("/pages/dashboard");
     } catch (error) {
       console.log(error);
