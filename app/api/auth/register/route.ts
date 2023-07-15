@@ -9,6 +9,15 @@ export async function POST(request: Request) {
   const { emailAddress, fullName, password } = body;
   await connectMongoDB();
 
+  if (password.length < 6) {
+    return NextResponse.json(
+      { error: "Password should be 6 characters long" },
+      {
+        status: 409,
+      }
+    );
+  }
+
   const userExists = await User.findOne({ emailAddress });
 
   if (userExists) {
@@ -18,39 +27,29 @@ export async function POST(request: Request) {
         status: 409,
       }
     );
-  } else {
-    if (password.length < 6) {
-      return NextResponse.json(
-        { error: "Password should be 6 characters long" },
-        {
-          status: 409,
-        }
-      );
-    }
   }
 
-  const hashedPassword = await hash(password, 12)
-
-  await User.create({
-    fullName,
-    emailAddress,
-    password : hashedPassword,
-  });
-
+  const hashedPassword = await hash(password, 12);
+  
   try {
+    await User.create({
+      fullName,
+      emailAddress,
+      password: hashedPassword,
+    });
+
     return NextResponse.json(
-      { success: true, 
-        message: "User registered",
-    },
+      { success: true, message: "User registered" },
       {
         status: 201,
       }
     );
   } catch (error) {
+    console.error("Error creating user:", error);
     return NextResponse.json(
-      { success: false, message: "User not Created", error },
+      { success: false, message: "An error occurred while registering the user" },
       {
-        status: 400,
+        status: 500,
       }
     );
   }
@@ -58,14 +57,16 @@ export async function POST(request: Request) {
 
 export async function GET() {
   await connectMongoDB();
-  const userList = await User.find();
+
   try {
+    const userList = await User.find();
     return NextResponse.json({ userList });
   } catch (error) {
+    console.error("Error fetching user list:", error);
     return NextResponse.json(
-      { message: "Error", error },
+      { message: "Error fetching user list", error },
       {
-        status: 500,
+        status: 400,
       }
     );
   }

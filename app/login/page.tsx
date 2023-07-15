@@ -35,7 +35,7 @@ export default function Signin() {
   const onSubmit = async (data: IUserRegiter) => {
     try {
       console.log(data);
-      const response = await axios.post("/api/auth/login", data);
+      const response = await axios.post("/api/auth/v1/login", data);
       console.log(response);
       router.push("/pages/dashboard");
     } catch (error) {
