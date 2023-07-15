@@ -12,8 +12,8 @@ export async function POST(request: Request) {
   const { emailAddress, password } = body;
   await connectMongoDB();
 
-  const userExists = await User.findOne({ emailAddress });
-
+  const userExists = await User.findOne({ emailAddress }).select("+password");
+  
   if (!userExists) {
     return NextResponse.json(
       { error: "User does not exist, please register" },
