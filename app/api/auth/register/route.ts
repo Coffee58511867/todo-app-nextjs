@@ -100,3 +100,4 @@ export async function DELETE(request: NextRequest) {
   await User.findByIdAndDelete(id);
   return NextResponse.json({ message: "Topic Deleted" }, { status: 200 });
 }
+
