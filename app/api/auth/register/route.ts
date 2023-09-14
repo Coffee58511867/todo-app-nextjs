@@ -6,7 +6,7 @@ import { hash } from "bcryptjs"
 export async function POST(request: Request) {
   const body = await request.json();
 
-  const { emailAddress, fullName, password } = body;
+  const { emailAddress, fullName, phoneNumber, is_admin , password } = body;
   await connectMongoDB();
 
   if (password.length < 6) {
@@ -17,10 +17,22 @@ export async function POST(request: Request) {
       }
     );
   }
+  else if(phoneNumber.length != 8){
+    return NextResponse.json(
+      {
+        error : "Phone number is 8 digits long",
+      },
+        {
+          status : 409,
+        }
+      
+    );
+  }
 
   const userExists = await User.findOne({ emailAddress });
+  const userPhoneNumberExists = await User.findOne({ phoneNumber });
 
-  if (userExists) {
+  if (userExists || userPhoneNumberExists) {
     return NextResponse.json(
       { error: "User Already exists" },
       {
@@ -35,6 +47,8 @@ export async function POST(request: Request) {
     await User.create({
       fullName,
       emailAddress,
+      phoneNumber,
+      is_admin,
       password: hashedPassword,
     });
 
