@@ -17,17 +17,14 @@ export async function POST(request: Request) {
       }
     );
   }
-  //  if(phoneNumber.length != 8){
-  //     return NextResponse.json(
-  //       {
-  //         error : "Phone number is 8 digits long",
-  //       },
-  //         {
-  //           status : 409,
-  //         }
-
-  //     );
-  //   }
+  if (!/^(\d{8})$/.test(phoneNumber)) {
+    return NextResponse.json(
+      { error: "Invalid phone number, it should be 8 numeric characters" },
+      {
+        status: 409,
+      }
+    );
+  }
 
   const userExists = await User.findOne({ emailAddress });
   const userPhoneNumberExists = await User.findOne({ phoneNumber });
