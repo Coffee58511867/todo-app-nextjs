@@ -13,6 +13,22 @@ const UserSchema = new Schema({
         minLength: [4, "Full name should be atleast 4 characters long"],
         maxLength: [30, "Full name should be less than 30 characters"]
     },
+    phoneNumber: {
+        type: String,
+        required: [true, "Phone number is required"],
+        validate: {
+            validator: function (value : string) {
+                return /^\d{8}$/.test(value);
+            },
+            message: "Invalid phone number, it should be 8 numeric characters"
+        }
+    },
+    is_admin: {
+        type: Boolean,
+        required: [true, "Usertype is required"],
+        enum: [true, false] 
+        
+    },
     password: {
         type: String,
         required: [true, "Password is required"],
