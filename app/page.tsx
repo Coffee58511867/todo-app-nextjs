@@ -99,6 +99,7 @@ import "./styles/Errors.css";
 import { uploadError } from "./Validators/FormValidator";
 import IUserRegiter from "./models/admin.type";
 import { todoinstance } from "./endpoint/api";
+import axios from "axios";
 
 export default function Signin() {
   const toast = useToast();
@@ -112,9 +113,9 @@ export default function Signin() {
   const onSubmit = async (data: IUserRegiter) => {
     try {
       console.log(data);
-      await todoinstance.post("/api/v1/users/login", data).then((responce) => {
+      await axios.post("/api/auth/v1/login", data).then((responce) => {
         console.log(responce.data.status);
-        if (responce.data.status === "ok") {
+        if (responce.data.message === "Authenticated") {
           console.log(responce.data);
           localStorage.setItem("token", responce.data.data);
           router.push("/items");

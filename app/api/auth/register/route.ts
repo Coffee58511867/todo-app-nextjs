@@ -80,7 +80,6 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-
   const cookieStore = cookies();
   const token = cookieStore.get("OurSideJWT");
 
@@ -105,7 +104,7 @@ export async function GET() {
 
     await connectMongoDB();
     const userList = await User.find();
-    
+
     return NextResponse.json({ userList });
   } catch (e) {
     return NextResponse.json(
@@ -119,10 +118,48 @@ export async function GET() {
   }
 }
 
-export async function DELETE(request: NextRequest) {
-  const id = request.nextUrl.searchParams.get("id");
-  await connectMongoDB();
-  await User.findByIdAndDelete(id);
-  return NextResponse.json({ message: "Topic Deleted" }, { status: 200 });
-}
+// export async function DELETE(request: NextRequest) {
+//   const id = request.nextUrl.searchParams.get("id");
+//   await connectMongoDB();
+//   await User.findByIdAndDelete(id);
+//   return NextResponse.json({ message: "Topic Deleted" }, { status: 200 });
+// }
 
+export async function DELETE(request: NextRequest) {
+  const cookieStore = cookies();
+  const token = cookieStore.get("OurSideJWT");
+
+  if (!token) {
+    return NextResponse.json(
+      {
+        message: "Unauthorized",
+      },
+      {
+        status: 401,
+      }
+    );
+  }
+
+  const { value } = token;
+
+  // Always check this
+  const secret = process.env.JWT_SECRET || "";
+
+  try {
+    verify(value, secret);
+
+    const id = request.nextUrl.searchParams.get("id");
+    await connectMongoDB();
+    await User.findByIdAndDelete(id);
+    return NextResponse.json({ message: "User Deleted" }, { status: 200 });
+  } catch (e) {
+    return NextResponse.json(
+      {
+        message: "Something went wrong",
+      },
+      {
+        status: 400,
+      }
+    );
+  }
+}

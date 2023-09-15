@@ -48,17 +48,17 @@ function ItemList() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     console.log(token);
-    const fetchItems = async () => {
-      try {
-        await todoinstance.get("/api/v1/items", {headers: {Authorization : `Bearer ${token}`}}).then((response) => {
-          setItems(response.data);
-          console.log(response.data);
-          setLoading(false);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    // const fetchItems = async () => {
+    //   try {
+    //     await todoinstance.get("/api/v1/items", {headers: {Authorization : `Bearer ${token}`}}).then((response) => {
+    //       setItems(response.data);
+    //       console.log(response.data);
+    //       setLoading(false);
+    //     });
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
     const fetchTopics = async () => {
       try {
         await axios.get("/api/topics/").then((response) => {
@@ -68,7 +68,7 @@ function ItemList() {
         console.log(error);
       }
     };
-    fetchItems();
+    // fetchItems();
     fetchTopics();
   }, []);
 
