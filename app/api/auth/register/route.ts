@@ -2,6 +2,8 @@ import connectMongoDB from "@/lib/mongodb";
 import User from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
 import { hash } from "bcryptjs";
+import { verify } from "jsonwebtoken";
+import { cookies } from "next/headers";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -78,15 +80,38 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-  await connectMongoDB();
+
+  const cookieStore = cookies();
+  const token = cookieStore.get("OurSideJWT");
+
+  if (!token) {
+    return NextResponse.json(
+      {
+        message: "Unauthorized",
+      },
+      {
+        status: 401,
+      }
+    );
+  }
+
+  const { value } = token;
+
+  // Always check this
+  const secret = process.env.JWT_SECRET || "";
 
   try {
+    verify(value, secret);
+
+    await connectMongoDB();
     const userList = await User.find();
+    
     return NextResponse.json({ userList });
-  } catch (error) {
-    console.error("Error fetching user list:", error);
+  } catch (e) {
     return NextResponse.json(
-      { message: "Error fetching user list", error },
+      {
+        message: "Something went wrong",
+      },
       {
         status: 400,
       }
