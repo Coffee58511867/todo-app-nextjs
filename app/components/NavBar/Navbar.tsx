@@ -221,26 +221,23 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: "Home",
-    href: "/agent",
+    href: "/customer",
   },
   {
-    label: "Deposit",
-    href: "/agent/send",
+    label: "About",
+    href: "/customer/about",
   },
-  // {
-  //   label: "Withdraw",
-  //   href: "/agent/withdraw",
-  // },
+ 
   {
     label: "Contact",
-    href: "/components/contact",
+    href: "/customer/contact",
   },
-  {
-    label: "Transactions",
-    href: "/agent/transactions",
-  },
-  {
-    label: "Profile",
-    href: "/agent/profile",
-  },
+//   {
+//     label: "Transactions",
+//     href: "/agent/transactions",
+//   },
+//   {
+//     label: "Profile",
+//     href: "/agent/profile",
+//   },
 ];
