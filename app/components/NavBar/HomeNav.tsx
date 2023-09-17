@@ -84,14 +84,14 @@ export default function Navigation() {
           ml={{ base: -2 }}
           display={{ base: "flex", md: "none" }}
         >
-          <Box ml="auto">
+          <Box ml="auto" borderRadius={10} borderColor={'pink.600'}>
             <IconButton
               onClick={onToggle}
               icon={
                 isOpen ? (
-                  <CloseIcon w={3} h={3} />
+                  <CloseIcon w={3} h={3} color={'pink.600'} />
                 ) : (
-                  <HamburgerIcon w={5} h={5} />
+                  <HamburgerIcon w={5} h={5} color={'pink.600'} />
                 )
               }
               variant={"ghost"}

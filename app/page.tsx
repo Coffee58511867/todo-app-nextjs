@@ -217,21 +217,61 @@
 
 "use client";
 
-import { Text } from "@chakra-ui/react";
+import { Button, Flex, Stack, Text, VStack, useBreakpointValue } from "@chakra-ui/react";
 import Navigation from "./components/NavBar/HomeNav";
 
 export default function Home() {
   return (
     <>
       <Navigation />
-      <Text
+      {/* <Text
         textAlign={"center"}
         fontSize={{ md: "md", lg: "3xl" }}
         color={"pink.400"}
         padding={10}
       >
         LESOTHO LAUNDRY COMPANY
-      </Text>
+      </Text> */}
+      <Flex
+      w={'full'}
+      h={'100vh'}
+      backgroundImage={
+        'url(https://img.freepik.com/free-vector/laundry-room-equipment-wash-dry-clothes-cartoon-set-washing-machine-basket-detergent-bottles-powder-rope-with-hanging-underwear-shirts-isolated-white-wall_107791-5924.jpg)'
+      }
+      backgroundSize={'cover'}
+      backgroundPosition={'center center'}>
+      <VStack
+        w={'full'}
+        justify={'center'}
+        px={useBreakpointValue({ base: 4, md: 8 })}
+        bgGradient={'linear(to-r, blackAlpha.600, transparent)'}>
+        <Stack maxW={'2xl'} align={'flex-start'} spacing={6}>
+          <Text
+            color={'white'}
+            fontWeight={700}
+            lineHeight={1.2}
+            fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}>
+            M4K LAUNDRY BUSINESS
+          </Text>
+          <Stack direction={'row'}>
+            <Button
+              colorScheme="pink"
+              rounded={'full'}
+              
+              _hover={{ bg: 'pink.500' }}>
+              Show me more
+            </Button>
+            <Button
+              bg={'whiteAlpha.300'}
+              rounded={'full'}
+              color={'white'}
+              _hover={{ bg: 'whiteAlpha.500' }}>
+              Show me more
+            </Button>
+          </Stack>
+        </Stack>
+      </VStack>
+    </Flex>
     </>
   );
 }
