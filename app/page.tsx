@@ -215,16 +215,23 @@
 //   );
 // }
 
+"use client";
 
-"use client"
+import { Text } from "@chakra-ui/react";
+import Navigation from "./components/NavBar/HomeNav";
 
-import Navigation from "./components/NavBar/HomeNav"
-
-
-export default function Home(){
-  return(
+export default function Home() {
+  return (
     <>
       <Navigation />
+      <Text
+        textAlign={"center"}
+        fontSize={{ md: "md", lg: "3xl" }}
+        color={"pink"}
+        padding={10}
+      >
+        LESOTHO LAUNDRY COMPANY
+      </Text>
     </>
-  )
+  );
 }

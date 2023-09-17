@@ -47,7 +47,7 @@ export default function Navigation() {
         {/* Logo for Deskop devices */}
         <Show above="sm">
           {/* <Avatar name="Lebelo" src={Logo.src} /> */}
-          <Text fontSize={"2xl"} fontWeight={"bold"}>
+          <Text fontSize={"2xl"} fontWeight={"bold"} color={"pink.600"}>
             M4K
           </Text>
         </Show>
@@ -55,7 +55,7 @@ export default function Navigation() {
           {/* // Logo for Small Devices below */}
           <Show below="sm">
             {/* <Avatar name="Lebelo" src={Logo.src} /> */}
-            <Text>M4K</Text>
+            <Text color={"pink.600"}>M4K</Text>
           </Show>
 
           <Flex display={{ base: "none", md: "flex" }} ml={50}>
@@ -73,17 +73,15 @@ export default function Navigation() {
             as={"a"}
             display={{ base: "none", md: "inline-flex" }}
             fontSize={"sm"}
-            href="/"
+            href="/register"
             fontWeight={600}
-            onClick={() => handleLogout()}
             colorScheme="whatsapp"
             color={"white"}
-            rightIcon={<FiLogOut />}
             _hover={{
               bg: "green.300",
             }}
           >
-            Logout
+            Create Account
           </Button>
         </Stack>
         <Flex
@@ -223,16 +221,16 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: "Home",
-    href: "/customer",
+    href: "/",
   },
   {
     label: "About",
-    href: "/customer/about",
+    href: "/about",
   },
 
   {
     label: "Contact",
-    href: "/customer/contact",
+    href: "/contact",
   },
   {
     label: "Create Accout",
