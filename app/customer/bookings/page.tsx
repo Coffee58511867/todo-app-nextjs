@@ -1,15 +1,18 @@
 "use client"
+import IBOOK from "@/app/models/book.type";
 import { Text } from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function BookingList(){
     const userId = localStorage.getItem("userId");
+    const [booking, setBooking] = useState<IBOOK[]>([]);
 
      useEffect(() => {
         async function fetchBooking(){
             await axios.get('/api/v1/book').then((response) => {
                 console.log(response.data.bookings);
+                setBooking(response.data.bookings);
             }).catch((error) => {
                 console.log(error)
             })
@@ -29,6 +32,13 @@ export default function BookingList(){
         <>
         <Text fontSize={'3xl'} color={'gray.600'} p={9}>
             Booking List
+        </Text>
+        <Text p={10} color={'gray.600'} >
+            {booking.map((item : IBOOK, index) => (
+                <h1 key={index}>
+                    {item.phoneNumber}
+                </h1>
+            ))}
         </Text>
         
         </>
