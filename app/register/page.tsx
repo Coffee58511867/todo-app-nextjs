@@ -8,6 +8,7 @@ import {
   Input,
   Stack,
   Link,
+  Text,
   useToast,
   Button,
   Heading,
@@ -87,9 +88,9 @@ export default function Signup() {
           >
             {" "}
             <Stack align={"center"} mb={{ base: 10 }}>
-              <Heading fontSize={{ base: "xl", md: "4xl" }}>
+              <Text fontSize={{ base: "xl", md: "4xl" }}>
                 Create an account
-              </Heading>
+              </Text>
             </Stack>
             <Stack spacing={4} py={13}>
               <FormControl id="name">

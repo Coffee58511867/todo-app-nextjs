@@ -10,6 +10,7 @@ import {
   Link,
   useToast,
   Button,
+  Text,
   Heading,
   useColorModeValue,
   InputGroup,
@@ -83,9 +84,9 @@ export default function Signin() {
           >
             {" "}
             <Stack align={"center"} mb={{ base: 10 }}>
-              <Heading fontSize={{ base: "xl", md: "4xl" }}>
+              <Text fontSize={{ base: "xl", md: "4xl" }}>
                 Sign in to your account
-              </Heading>
+              </Text>
             </Stack>
             <Stack spacing={4} py={13}>
               <FormControl id="email">
@@ -121,7 +122,7 @@ export default function Signin() {
                 )}
               </FormControl>
               <Stack spacing={7}>
-                <Link color={"blue.400"} ml="auto" href="/resetPassword">
+                <Link color={"pink.400"} ml="auto" href="/resetPassword">
                   Forgot password?
                 </Link>
 

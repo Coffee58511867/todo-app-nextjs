@@ -24,12 +24,7 @@ import { useRouter, usePathname } from "next/navigation";
 
 export default function Navigation() {
   const { isOpen, onToggle } = useDisclosure();
-  const router = useRouter();
 
-  const handleLogout = () => {
-    sessionStorage.clear();
-    router.push("/");
-  };
 
   return (
     <Box className="header">
@@ -78,7 +73,7 @@ export default function Navigation() {
             colorScheme="pink"
             color={"white"}
             _hover={{
-              bg: "green.300",
+              bg: "pink.300",
             }}
           >
             Create Account
