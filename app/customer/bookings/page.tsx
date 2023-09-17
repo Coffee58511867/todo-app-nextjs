@@ -1,6 +1,7 @@
 "use client";
 import IBOOK from "@/app/models/book.type";
 import {
+  Button,
   Table,
   TableContainer,
   Tbody,
@@ -12,11 +13,13 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function BookingList() {
   const userId = localStorage.getItem("userId");
   console.log(userId);
   const [booking, setBooking] = useState<IBOOK[]>([]);
+  const router= useRouter();
 
   useEffect(() => {
     async function fetchBooking() {
@@ -48,6 +51,12 @@ export default function BookingList() {
 
     fetchBooking();
   }, [userId]);
+
+
+  const handleUpdate = (itemId: string) => {
+    router.push(`/customer/updatebooking/${itemId}`);
+  };
+
   return (
     <>
       <Text fontSize={"3xl"} color={"gray.600"} p={9}>
@@ -58,12 +67,11 @@ export default function BookingList() {
           <Thead>
             <Tr>
               <Th>Full Names</Th>
-
               <Th>Pickup time</Th>
-
               <Th>Delivery time</Th>
               <Th>Phone Number</Th>
               <Th>Booking Status</Th>
+              <Th>Update</Th>
             </Tr>
           </Thead>
 
@@ -74,6 +82,15 @@ export default function BookingList() {
               <Td>{item.deliveryTime}</Td>
               <Td>{item.phoneNumber}</Td>
               <Td>{item.bookingStatus}</Td>
+              <Td>
+                  <Button
+                    colorScheme="teal"
+                    onClick={() => handleUpdate(item._id)}
+                    size="sm"
+                  >
+                    Update
+                  </Button>
+                </Td>
             </Tbody>
           ))}
         </Table>
