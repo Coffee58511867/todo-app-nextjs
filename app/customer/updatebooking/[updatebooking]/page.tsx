@@ -50,7 +50,7 @@ export default function UpdateBooking() {
         setItem(res.data.item);
         console.log(res.data.item);
       }).catch((error : AxiosError) => {
-        console.log(error)
+        console.log(error.response?.status)
       })
     };
     fetchItem();
