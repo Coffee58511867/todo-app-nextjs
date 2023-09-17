@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 export default function Profile(){
 
-    const [userProfile , setUserProfile] = useState<IUserRegiter[]>([]);
+    const [userProfile , setUserProfile] = useState<IUserRegiter>();
   
     const userId = localStorage.getItem("userId");
      console.log(userId);
@@ -27,6 +27,7 @@ export default function Profile(){
     return(
         <div>
             <Text fontSize={'4xl'}>Welcome to M4K Laundry {userId}</Text>
+            <Text>{userProfile?.fullName}</Text>
         </div>
     )
 }
