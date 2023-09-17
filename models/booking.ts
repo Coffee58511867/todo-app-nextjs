@@ -40,14 +40,12 @@ const BookingSchema = new Schema(
       required: [true, "Location is required"],
     },
     bookingStatus: {
-        type: String,
-        required: [true, "Booking status is required"],
-      },
-      laundryStatus: {
-        type: String,
-        required: [true, "Laundry status is required"],
-      },
-    
+      type: String,
+      
+    },
+    laundryStatus: {
+      type: String,
+    },
 
     fullName: {
       type: String,

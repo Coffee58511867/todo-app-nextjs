@@ -22,8 +22,6 @@ export async function POST(
     deliveryDate,
     deliveryTime,
     phoneNumber,
-    bookingStatus,
-    laundryStatus,
     laundryType,
     LaundryContainer,
     quantity,
@@ -40,7 +38,7 @@ export async function POST(
   }
 
   await Book.create({
-    customerId : buyer._id,
+    customerId: buyer._id,
     pickupDate,
     pickupTime,
     location,
@@ -50,8 +48,6 @@ export async function POST(
     laundryType,
     LaundryContainer,
     quantity,
-    bookingStatus : bookStatus,
-    laundryStatus : LStatus,
   });
   try {
     return NextResponse.json(
