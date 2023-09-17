@@ -28,6 +28,7 @@ export default function Navigation() {
 
   const handleLogout = () => {
     sessionStorage.clear();
+    localStorage.clear();
     router.push("/");
   };
 

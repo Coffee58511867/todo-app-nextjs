@@ -42,12 +42,13 @@ export default function Signin() {
       console.log(response.data);
 
       const tk = response.data.token;
-      console.log(tk);
+      // console.log(tk);
 
       // Decode the token to get the user ID
       const decodedToken: any = jwtDecode(tk);
       const userId = decodedToken.userId;
       // console.log("User ID:", userId);
+      localStorage.setItem("token", tk);
       localStorage.setItem("userId", userId);
       // router.push("/pages/dashboard");
       router.push("/customer");
