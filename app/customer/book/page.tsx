@@ -16,7 +16,14 @@ import {
   InputGroup,
   InputLeftElement,
 } from "@chakra-ui/react";
-import { FiMail, FiLock, FiUser, FiPhone, FiUploadCloud, FiDatabase } from "react-icons/fi";
+import {
+  FiMail,
+  FiLock,
+  FiUser,
+  FiPhone,
+  FiUploadCloud,
+  FiDatabase,
+} from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import "../../styles/Errors.css";
@@ -38,8 +45,15 @@ export default function Signup() {
   const onSubmit = async (data: IBOOK) => {
     try {
       console.log(data);
-      data.customerId  = userId;
-      const response = await axios.post("/api/v1/book", data);
+      data.customerId = userId;
+      const response = await axios.post("/api/v1/book", data, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      });
+
       console.log(response.data);
 
       // router.push("/pages/dashboard");
@@ -50,9 +64,8 @@ export default function Signup() {
         duration: 9000,
         isClosable: true,
       });
-      
     } catch (error: any) {
-      console.log(error);
+      console.log(error.response.data.message);
       toast({
         title: "Registration Failed",
         description: error.response.data.message,
@@ -165,7 +178,6 @@ export default function Signup() {
                       </InputLeftElement>
                       <Input
                         type="date"
-                        
                         {...register("pickupDate", uploadError.pickupDate)}
                       />
                     </InputGroup>
@@ -236,11 +248,16 @@ export default function Signup() {
                       <Input
                         type="text"
                         placeholder="Maseru"
-                        {...register("LaundryContainer", uploadError.LaundryContainer)}
+                        {...register(
+                          "LaundryContainer",
+                          uploadError.LaundryContainer
+                        )}
                       />
                     </InputGroup>
                     {errors?.LaundryContainer && (
-                      <p className="error">{errors.LaundryContainer?.message}</p>
+                      <p className="error">
+                        {errors.LaundryContainer?.message}
+                      </p>
                     )}
                   </FormControl>
 
