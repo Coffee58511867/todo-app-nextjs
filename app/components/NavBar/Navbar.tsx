@@ -225,12 +225,20 @@ const NAV_ITEMS: Array<NavItem> = [
     href: "/customer",
   },
   {
-    label: "About",
+    label: "Book",
     href: "/customer/about",
   },
  
   {
-    label: "Contact",
+    label: "Bookings",
+    href: "/customer/contact",
+  },
+  {
+    label: "My Rewards",
+    href: "/customer/contact",
+  },
+  {
+    label: "Promotions",
     href: "/customer/contact",
   },
   {
