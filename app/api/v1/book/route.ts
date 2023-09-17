@@ -5,14 +5,17 @@ import { verify } from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request, { params }:  { params: { id: string } }) {
+export async function POST(request: Request) {
+
+//    const { searchParams } = new URL(request.url)
+//   const id = searchParams.get('id')
+
+//   const buyer = await User.findById(id);
+//   console.log(buyer);
 
   const bookStatus = "PENDING";
   const LStatus = "NOT COLLECTED";
 
-  const userId = params.id;
-
-  const buyer = await User.findById(userId);
   const {
     laundryStatus,
     bookingStatus,
@@ -30,31 +33,22 @@ export async function POST(request: Request, { params }:  { params: { id: string
   } = await request.json();
   await connectMongoDB();
 
-  if (!buyer) {
-    return NextResponse.json(
-      { error: "Customer not found" },
-      {
-        status: 409,
-      }
-    );
-  }
-
-try {
-  await Book.create({
-    customerId : buyer._id,
-    pickupDate,
-    pickupTime,
-    fullName,
-    location,
-    deliveryDate,
-    deliveryTime,
-    phoneNumber,
-    laundryType,
-    LaundryContainer,
-    quantity,
-    laundryStatus : LStatus,
-    bookingStatus: bookStatus,
-  });
+  try {
+    await Book.create({
+      customerId,
+      pickupDate,
+      pickupTime,
+      fullName,
+      location,
+      deliveryDate,
+      deliveryTime,
+      phoneNumber,
+      laundryType,
+      LaundryContainer,
+      quantity,
+      laundryStatus: LStatus,
+      bookingStatus: bookStatus,
+    });
 
     return NextResponse.json(
       { message: "Booking Created" },

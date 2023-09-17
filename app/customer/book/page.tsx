@@ -46,6 +46,7 @@ export default function Signup() {
     try {
       console.log(data);
       data.customerId = userId;
+      
       const response = await axios.post("/api/v1/book", data, {
         headers: {
           Accept: "application/json",
