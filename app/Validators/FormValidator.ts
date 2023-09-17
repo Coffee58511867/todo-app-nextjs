@@ -1,99 +1,98 @@
 export const uploadError = {
-    firstName: {
-      required: "First name is required",
-      minLength: 3,
-      pattern: {
-        value: /^[a-zA-Z\u00C0-\u017F]+(?:\s[a-zA-Z\u00C0-\u017F]+)*$/,
-        message: "Invalid character!!",
-      },
+  firstName: {
+    required: "First name is required",
+    minLength: 3,
+    pattern: {
+      value: /^[a-zA-Z\u00C0-\u017F]+(?:\s[a-zA-Z\u00C0-\u017F]+)*$/,
+      message: "Invalid character!!",
     },
-    lastName: {
-      required: "Last name is required",
-      minLength: 3,
-      pattern: {
-        value: /^[a-zA-Z\u00C0-\u017F]+(?:\s[a-zA-Z\u00C0-\u017F]+)*$/,
-        message: "Invalid character!!",
-      },
+  },
+  lastName: {
+    required: "Last name is required",
+    minLength: 3,
+    pattern: {
+      value: /^[a-zA-Z\u00C0-\u017F]+(?:\s[a-zA-Z\u00C0-\u017F]+)*$/,
+      message: "Invalid character!!",
     },
-    phoneNumber: {
-        required: "Phone number is required",
-        maxLength: 8,
-        minLength: 8,
-      },
-      emailAddress: {
-        required: "Email address is required",
-        pattern: {
-          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-          message: "Invalid email address",
-        },
-      },
-      password: {
-        required: "Password is required",
-        pattern : {
-            value:  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/,
-            message: "Minimum eight characters, at least one letter, one number and one special character"
-        }
-      },
-      loginpassword: {
-        required: "Password is required",
-      },
-      fullName: {
-        required: "Password is required",
-      },
-      username : {
-        required: "Username is required",
-      },
-      title: {
-        required: "Title is required",
-      },
-      body : {
-        required: "Body is required",
-      },
-     description : {
-        required: "Body is required",
-      },
+  },
+  phoneNumber: {
+    required: "Phone number is required",
+    maxLength: 8,
+    minLength: 8,
+  },
+  emailAddress: {
+    required: "Email address is required",
+    pattern: {
+      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+      message: "Invalid email address",
+    },
+  },
+  password: {
+    required: "Password is required",
+    pattern: {
+      value:
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/,
+      message:
+        "Minimum eight characters, at least one letter, one number and one special character",
+    },
+  },
+  loginpassword: {
+    required: "Password is required",
+  },
+  fullName: {
+    required: "Password is required",
+  },
+  username: {
+    required: "Username is required",
+  },
+  title: {
+    required: "Title is required",
+  },
+  body: {
+    required: "Body is required",
+  },
+  description: {
+    required: "Body is required",
+  },
 
-      //BOOKING FORM BELOW
-      
-      pickupDate : {
-        required: "Body is required",
-      },
-    pickupTime : {
-      required: "Body is required",
-    },
+  //BOOKING FORM BELOW
 
+  pickupDate: {
+    required: "Body is required",
+  },
+  pickupTime: {
+    required: "Body is required",
+  },
 
-    deliveryDate : {
-      required: "Body is required",
-    },
+  deliveryDate: {
+    required: "Body is required",
+  },
 
-   
-    deliveryTime : {
-      required: "Body is required",
-    },
-   
-    location : {
-      required: "Body is required",
-    },
-    laundryType : {
-      required: "Body is required",
-    },
-  
-    LaundryContainer :  {
-      required: "Body is required",
-    },
-    quantity :  {
-      required: "Body is required",
-    },
-   
-    laundryStatus :  {
-      required: "Body is required",
-    },
-    bookingStatus :  {
-      required: "Body is required",
-    },
-  };
+  deliveryTime: {
+    required: "Body is required",
+  },
 
+  location: {
+    required: "Body is required",
+  },
+  laundryType: {
+    required: "Body is required",
+  },
+
+  LaundryContainer: {
+    required: "Body is required",
+  },
+  quantity: {
+    required: "Body is required",
+  },
+
+  laundryStatus: {
+    required: "Body is required",
+  },
+  bookingStatus: {
+    required: "Body is required",
+  },
+};
 
 //  { message for Password regex = Min 1 uppercase letter.
 //   Min 1 lowercase letter.

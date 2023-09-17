@@ -16,6 +16,7 @@ export async function POST(request: Request) {
     pickupTime,
     location,
     deliveryDate,
+    fullName,
     deliveryTime,
     phoneNumber,
     laundryType,
@@ -33,10 +34,12 @@ export async function POST(request: Request) {
 //     );
 //   }
 
+try {
   await Book.create({
     customerId,
     pickupDate,
     pickupTime,
+    fullName,
     location,
     deliveryDate,
     deliveryTime,
@@ -45,7 +48,7 @@ export async function POST(request: Request) {
     LaundryContainer,
     quantity,
   });
-  try {
+
     return NextResponse.json(
       { message: "Booking Created" },
       {
@@ -53,10 +56,14 @@ export async function POST(request: Request) {
       }
     );
   } catch (error) {
+    console.error("Error booking :", error);
     return NextResponse.json(
-      { message: "Booking not Created", error },
       {
-        status: 400,
+        success: false,
+        message: "An error occurred while booking",
+      },
+      {
+        status: 500,
       }
     );
   }
