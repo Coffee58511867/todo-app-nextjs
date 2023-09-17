@@ -19,13 +19,10 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import "../../styles/Header.css";
-import { FiLogOut } from "react-icons/fi";
 import { useRouter, usePathname } from "next/navigation";
 
 export default function Navigation() {
   const { isOpen, onToggle } = useDisclosure();
-
-
   return (
     <Box className="header">
       <Flex
