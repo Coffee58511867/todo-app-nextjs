@@ -2,6 +2,7 @@
 
 import { Open_Sans } from "next/font/google";
 import Navigation from "../components/NavBar/Navbar";
+import Head from "next/head";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
@@ -11,14 +12,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
+    <>
+      <Head>
         <title>M4K Laundry</title>
-      </head>
-      <body>
+      </Head>
+     <main>
         <Navigation />
         {children}
-      </body>
-    </html>
+      
+    </main>
+    </>
   );
 }
