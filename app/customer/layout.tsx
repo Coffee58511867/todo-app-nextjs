@@ -22,7 +22,6 @@ export default function RootLayout({
     if (!userToken){
      router.back();
     }
-
   }, [router])
 
   if(loaidng){

@@ -126,14 +126,15 @@ export default function Signin() {
                 </Link>
 
                 <Button
-                  bg={"blue.400"}
+                 
                   type="submit"
                   size={{ base: "sm", md: "md" }}
                   color={"white"}
+                  colorScheme="pink"
                   isLoading={isSubmitting}
                   loadingText="Submitting"
                   _hover={{
-                    bg: "blue.500",
+                    bg: "pink.500",
                   }}
                 >
                   Sign in

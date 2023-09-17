@@ -75,7 +75,7 @@ export default function Navigation() {
             fontSize={"sm"}
             href="/register"
             fontWeight={600}
-            colorScheme="whatsapp"
+            colorScheme="pink"
             color={"white"}
             _hover={{
               bg: "green.300",
