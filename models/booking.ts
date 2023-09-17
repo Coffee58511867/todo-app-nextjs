@@ -1,9 +1,10 @@
 import IBook from "@/interfaces/book";
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, model, models } from "mongoose";
 
 const BookingSchema = new Schema({
   customerId: {
     type: String,
+    ref: "User",
     required: [true, "Customer id is required"],
   },
   pickupDate: {
@@ -64,6 +65,9 @@ const BookingSchema = new Schema({
 });
 
 // const Book = models.Book || model("Use6Bookings", BookingSchema);
-const Book = mongoose.models.BookingsList || mongoose.model<IBook>("BookingsList", BookingSchema);
+// const Book =
+//   mongoose.models.BookingsList ||
+//   mongoose.model<IBook>("CustomerBookingsList", BookingSchema);
+  const Book = models.bookings || model("bookings", BookingSchema)
 
 export default Book;

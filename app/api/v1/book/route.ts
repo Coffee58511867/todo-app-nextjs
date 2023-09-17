@@ -1,16 +1,21 @@
 import connectMongoDB from "@/lib/mongodb";
 import Book from "@/models/booking";
+import User from "@/models/user";
 import { verify } from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request) {
-  //   const { buyerId } = params;
-  //   const buyer = await User.findById(buyerId);
+export async function POST(request: Request, { params }:  { params: { id: string } }) {
 
   const bookStatus = "PENDING";
   const LStatus = "NOT COLLECTED";
+
+  const userId = params.id;
+
+  const buyer = await User.findById(userId);
   const {
+    laundryStatus,
+    bookingStatus,
     customerId,
     pickupDate,
     pickupTime,
@@ -25,18 +30,18 @@ export async function POST(request: Request) {
   } = await request.json();
   await connectMongoDB();
 
-//   if (!buyer) {
-//     return NextResponse.json(
-//       { error: "Customer not found" },
-//       {
-//         status: 409,
-//       }
-//     );
-//   }
+  if (!buyer) {
+    return NextResponse.json(
+      { error: "Customer not found" },
+      {
+        status: 409,
+      }
+    );
+  }
 
 try {
   await Book.create({
-    customerId,
+    customerId : buyer._id,
     pickupDate,
     pickupTime,
     fullName,
@@ -47,6 +52,8 @@ try {
     laundryType,
     LaundryContainer,
     quantity,
+    laundryStatus : LStatus,
+    bookingStatus: bookStatus,
   });
 
     return NextResponse.json(

@@ -1,4 +1,5 @@
 export default interface IBook {
+    _id : string,
     customerId : string | null,
     pickupDate : Date,
     pickupTime : string,
