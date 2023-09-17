@@ -84,12 +84,12 @@ export default function Signup() {
             bg={useColorModeValue("white", "gray.700")}
             boxShadow={"lg"}
             p={8}
-            w={500}
+          
           >
             {" "}
             <Stack align={"center"} mb={{ base: 10 }}>
               <Text fontSize={{ base: "xl", md: "4xl" }}>
-                Create an account
+                Create an account to join M4K
               </Text>
             </Stack>
             <Stack spacing={4} py={13}>

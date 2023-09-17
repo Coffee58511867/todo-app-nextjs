@@ -234,7 +234,7 @@ const NAV_ITEMS: Array<NavItem> = [
     href: "/customer/contact",
   },
   {
-    label: "My Rewards",
+    label: "Rewards",
     href: "/customer/contact",
   },
   {
