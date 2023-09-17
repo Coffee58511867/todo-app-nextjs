@@ -1,13 +1,19 @@
 import connectMongoDB from "@/lib/mongodb";
 import Book from "@/models/booking";
+import User from "@/models/user";
 import { verify } from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST(
+  request: Request,
+  { params }: { params: { buyerId: string } }
+) {
+  const { buyerId } = params;
+  const buyer = await User.findById(buyerId);
 
-    const bookingStatus = 'PENDING';
-    const LaundryStatus = 'NOT COLLECTED';
+  const bookStatus = "PENDING";
+  const LStatus = "NOT COLLECTED";
   const {
     customerId,
     pickupDate,
@@ -16,14 +22,25 @@ export async function POST(request: Request) {
     deliveryDate,
     deliveryTime,
     phoneNumber,
+    bookingStatus,
+    laundryStatus,
     laundryType,
     LaundryContainer,
     quantity,
   } = await request.json();
   await connectMongoDB();
 
+  if (!buyer) {
+    return NextResponse.json(
+      { error: "Customer not found" },
+      {
+        status: 409,
+      }
+    );
+  }
+
   await Book.create({
-    customerId,
+    customerId : buyer._id,
     pickupDate,
     pickupTime,
     location,
@@ -33,17 +50,19 @@ export async function POST(request: Request) {
     laundryType,
     LaundryContainer,
     quantity,
+    bookingStatus : bookStatus,
+    laundryStatus : LStatus,
   });
   try {
     return NextResponse.json(
-      { message: "Topic Created" },
+      { message: "Booking Created" },
       {
         status: 201,
       }
     );
   } catch (error) {
     return NextResponse.json(
-      { message: "Topic not Created", error },
+      { message: "Booking not Created", error },
       {
         status: 400,
       }
