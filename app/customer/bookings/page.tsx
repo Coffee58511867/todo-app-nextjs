@@ -15,7 +15,7 @@ export default function BookingList(){
             })
         } 
         async function fetchUserBooking(){
-            await axios.get(`/api/v1/book/'${userId}`).then((response) => {
+            await axios.get("/api/v1/book/" + userId).then((response) => {
                 console.log("My Bookings " , response.data.bookings);
             }).catch((error) => {
                 console.log(error)
