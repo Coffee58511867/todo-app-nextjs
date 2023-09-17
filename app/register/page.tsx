@@ -22,11 +22,9 @@ import "../styles/Errors.css";
 import { uploadError } from "../Validators/FormValidator";
 import IUserRegiter from "../models/admin.type";
 import axios from "axios";
-import { verify } from "jsonwebtoken";
-import jwtDecode from "jwt-decode";
 import Navigation from "../components/NavBar/HomeNav";
 
-export default function Signin() {
+export default function Signup() {
   const toast = useToast();
   const router = useRouter();
   const {
@@ -38,18 +36,11 @@ export default function Signin() {
   const onSubmit = async (data: IUserRegiter) => {
     try {
       console.log(data);
-      const response = await axios.post("/api/auth/v1/login", data);
+      const response = await axios.post("/api/auth/register", data);
       console.log(response.data);
 
-      const tk = response.data.token;
-      console.log(tk);
-
-      // Decode the token to get the user ID
-      const decodedToken: any = jwtDecode(tk);
-      const userId = decodedToken.userId;
-      console.log("User ID:", userId);
       // router.push("/pages/dashboard");
-      router.push("/customer");
+      router.push("/login");
     } catch (error) {
       console.log(error);
       toast({
@@ -82,10 +73,42 @@ export default function Signin() {
             {" "}
             <Stack align={"center"} mb={{ base: 10 }}>
               <Heading fontSize={{ base: "xl", md: "4xl" }}>
-                Sign in to your account
+                Create an account
               </Heading>
             </Stack>
             <Stack spacing={4} py={13}>
+              <FormControl id="email">
+                <FormLabel>Full Names</FormLabel>
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none">
+                    <FiMail color="gray.300" />
+                  </InputLeftElement>
+                  <Input
+                    type="text"
+                    placeholder="John Doe"
+                    {...register("fullName", uploadError.fullName)}
+                  />
+                </InputGroup>
+                {errors?.fullName && (
+                  <p className="error">{errors.fullName?.message}</p>
+                )}
+              </FormControl>
+              <FormControl id="email">
+                <FormLabel>Contact No.</FormLabel>
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none">
+                    <FiMail color="gray.300" />
+                  </InputLeftElement>
+                  <Input
+                    type="text"
+                    placeholder="67891234"
+                    {...register("phoneNumber", uploadError.phoneNumber)}
+                  />
+                </InputGroup>
+                {errors?.phoneNumber && (
+                  <p className="error">{errors.phoneNumber?.message}</p>
+                )}
+              </FormControl>
               <FormControl id="email">
                 <FormLabel>Email address</FormLabel>
                 <InputGroup>
@@ -119,9 +142,7 @@ export default function Signin() {
                 )}
               </FormControl>
               <Stack spacing={7}>
-                <Link color={"blue.400"} ml="auto" href="/resetPassword">
-                  Forgot password?
-                </Link>
+          
 
                 <Button
                   bg={"blue.400"}
@@ -134,7 +155,7 @@ export default function Signin() {
                     bg: "blue.500",
                   }}
                 >
-                  Sign in
+                  Sign up
                 </Button>
               </Stack>
             </Stack>

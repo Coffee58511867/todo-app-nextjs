@@ -3,6 +3,9 @@ export type IUserRegiter = {
     firstName: string;
     lastName: string;
     emailAddress: string;
+    fullName : string;
+    phoneNumber : string;
+    is_Admin : boolean;
     username : string;
     password: string;
   };
