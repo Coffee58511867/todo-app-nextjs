@@ -47,6 +47,13 @@ export default function Signup() {
       console.log(response.data);
 
       // router.push("/pages/dashboard");
+      toast({
+        title: "Registration Sucessfully",
+        description: response.data.message,
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
       router.push("/login");
     } catch (error: any) {
       console.log(error);
