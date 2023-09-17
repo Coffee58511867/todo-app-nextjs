@@ -47,7 +47,8 @@ export default function Signin() {
       // Decode the token to get the user ID
       const decodedToken: any = jwtDecode(tk);
       const userId = decodedToken.userId;
-      console.log("User ID:", userId);
+      // console.log("User ID:", userId);
+      localStorage.setItem("userId", userId);
       // router.push("/pages/dashboard");
       router.push("/customer");
     } catch (error) {
