@@ -48,7 +48,9 @@ export default function Navigation() {
         {/* Logo for Deskop devices */}
         <Show above="sm">
           {/* <Avatar name="Lebelo" src={Logo.src} /> */}
-          <Text fontSize={'2xl'} fontWeight={800} color={'pink.500'}>M4K</Text>
+          <Text fontSize={"2xl"} fontWeight={800} color={"pink.500"}>
+            M4K
+          </Text>
         </Show>
         <Flex flex={{ base: 1 }} justify={{ base: "start", md: "center" }}>
           {/* // Logo for Small Devices below */}
@@ -226,9 +228,9 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: "Book",
-    href: "/customer/about",
+    href: "/customer/book",
   },
- 
+
   {
     label: "Bookings",
     href: "/customer/contact",
@@ -245,12 +247,12 @@ const NAV_ITEMS: Array<NavItem> = [
     label: "Profile",
     href: "/customer/profile",
   },
-//   {
-//     label: "Transactions",
-//     href: "/agent/transactions",
-//   },
-//   {
-//     label: "Profile",
-//     href: "/agent/profile",
-//   },
+  //   {
+  //     label: "Transactions",
+  //     href: "/agent/transactions",
+  //   },
+  //   {
+  //     label: "Profile",
+  //     href: "/agent/profile",
+  //   },
 ];

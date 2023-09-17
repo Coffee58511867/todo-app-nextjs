@@ -19,7 +19,7 @@ import {
 import { FiMail, FiLock, FiUser, FiPhone, FiUploadCloud, FiDatabase } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import "../styles/Errors.css";
+import "../../styles/Errors.css";
 import { uploadError } from "../../Validators/FormValidator";
 import axios from "axios";
 import IBOOK from "@/app/models/book.type";
@@ -33,10 +33,12 @@ export default function Signup() {
     formState: { errors, isSubmitting },
   } = useForm<IBOOK>();
 
+  const userId = localStorage.getItem("userId");
+
   const onSubmit = async (data: IBOOK) => {
     try {
       console.log(data);
-
+      data.customerId  = userId;
       const response = await axios.post("/api/v1/book", data);
       console.log(response.data);
 
@@ -48,7 +50,7 @@ export default function Signup() {
         duration: 9000,
         isClosable: true,
       });
-      router.push("/login");
+      
     } catch (error: any) {
       console.log(error);
       toast({

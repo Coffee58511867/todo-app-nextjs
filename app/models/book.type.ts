@@ -1,6 +1,6 @@
 export type IBOOK = {
     _id: string;
-    customerId : string,
+    customerId : string | null,
     pickupDate : Date,
     pickupTime : string,
     fullName : string,
