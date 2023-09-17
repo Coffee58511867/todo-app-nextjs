@@ -47,7 +47,8 @@ export default function Signin() {
       const decodedToken: any = jwtDecode(tk);
       const userId = decodedToken.userId;
       console.log("User ID:", userId);
-      router.push("/pages/dashboard");
+      // router.push("/pages/dashboard");
+      router.push("/customer");
     } catch (error) {
       console.log(error);
       toast({

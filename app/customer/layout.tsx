@@ -1,6 +1,5 @@
 "use client"
 
-import "./globals.css";
 import { Open_Sans } from "next/font/google";
 import Navigation from "../components/NavBar/Navbar";
 
@@ -16,7 +15,7 @@ export default function RootLayout({
       <head>
         <title>M4K Laundry</title>
       </head>
-      <body className={inter.className}>
+      <body>
         <Navigation />
         {children}
       </body>
