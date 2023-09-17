@@ -37,7 +37,7 @@ export default function Signup() {
     try {
       console.log(data);
 
-      const response = await axios.post("/api/auth/register", data);
+      const response = await axios.post("/api/v1/book", data);
       console.log(response.data);
 
       // router.push("/pages/dashboard");
