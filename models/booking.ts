@@ -4,7 +4,6 @@ import mongoose, { Schema } from "mongoose";
 const BookingSchema = new Schema({
   customerId: {
     type: String,
-    unique: true,
     required: [true, "Customer id is required"],
   },
   pickupDate: {
