@@ -95,9 +95,9 @@ export async function GET() {
     verify(value, secret);
 
     await connectMongoDB();
-    const topics = await Book.find();
+    const bookings = await Book.find();
 
-    return NextResponse.json({ topics });
+    return NextResponse.json({ bookings });
   } catch (error) {
     return NextResponse.json(
       { message: "Error", error },
