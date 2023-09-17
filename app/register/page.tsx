@@ -15,7 +15,7 @@ import {
   InputGroup,
   InputLeftElement,
 } from "@chakra-ui/react";
-import { FiMail, FiLock } from "react-icons/fi";
+import { FiMail, FiLock, FiUser, FiPhone } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import "../styles/Errors.css";
@@ -36,16 +36,23 @@ export default function Signup() {
   const onSubmit = async (data: IUserRegiter) => {
     try {
       console.log(data);
-      const response = await axios.post("/api/auth/register", data);
+      const userData = {
+       'phoneNumber' : data.phoneNumber,
+       'emailAddress' : data.emailAddress,
+       'fullName' : data.fullName,
+       'password' : data.password,
+       'is_Admin' : false,
+      };
+      const response = await axios.post("/api/auth/register", userData);
       console.log(response.data);
 
       // router.push("/pages/dashboard");
       router.push("/login");
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       toast({
-        title: "Access denied.",
-        description: "wrong username or password",
+        title: "Registration Failed",
+        description: error.response.data.message,
         status: "error",
         duration: 9000,
         isClosable: true,
@@ -69,6 +76,7 @@ export default function Signup() {
             bg={useColorModeValue("white", "gray.700")}
             boxShadow={"lg"}
             p={8}
+            w={500}
           >
             {" "}
             <Stack align={"center"} mb={{ base: 10 }}>
@@ -77,11 +85,11 @@ export default function Signup() {
               </Heading>
             </Stack>
             <Stack spacing={4} py={13}>
-              <FormControl id="email">
+              <FormControl id="name">
                 <FormLabel>Full Names</FormLabel>
                 <InputGroup>
                   <InputLeftElement pointerEvents="none">
-                    <FiMail color="gray.300" />
+                    <FiUser color="gray.300" />
                   </InputLeftElement>
                   <Input
                     type="text"
@@ -93,11 +101,11 @@ export default function Signup() {
                   <p className="error">{errors.fullName?.message}</p>
                 )}
               </FormControl>
-              <FormControl id="email">
+              <FormControl id="phone">
                 <FormLabel>Contact No.</FormLabel>
                 <InputGroup>
                   <InputLeftElement pointerEvents="none">
-                    <FiMail color="gray.300" />
+                    <FiPhone color="gray.300" />
                   </InputLeftElement>
                   <Input
                     type="text"

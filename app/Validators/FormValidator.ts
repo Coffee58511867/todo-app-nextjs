@@ -37,6 +37,9 @@ export const uploadError = {
       loginpassword: {
         required: "Password is required",
       },
+      fullName: {
+        required: "Password is required",
+      },
       username : {
         required: "Username is required",
       },
