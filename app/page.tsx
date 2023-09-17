@@ -227,7 +227,7 @@ export default function Home() {
       <Text
         textAlign={"center"}
         fontSize={{ md: "md", lg: "3xl" }}
-        color={"pink"}
+        color={"pink.400"}
         padding={10}
       >
         LESOTHO LAUNDRY COMPANY

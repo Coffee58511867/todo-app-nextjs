@@ -115,8 +115,8 @@ export default function Navigation() {
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue("gray.600", "gray.200");
-  const linkHoverColor = useColorModeValue("green", "white");
-  const activeColor = useColorModeValue("whatsapp.500", "green");
+  const linkHoverColor = useColorModeValue("pink", "white");
+  const activeColor = useColorModeValue("pink.500", "green");
   const currentPath = usePathname();
 
   return (
@@ -201,7 +201,7 @@ const MobileNavItem = ({ label, href }: NavItem) => {
           fontWeight={600}
           color={
             currentPath === href // Compare currentPath with href
-              ? useColorModeValue("whatsapp.500", "green") // Active link color
+              ? useColorModeValue("pink.500", "green") // Active link color
               : useColorModeValue("gray.600", "gray.200") // Inactive link color
           }
         >
