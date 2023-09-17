@@ -33,7 +33,7 @@ export default function BookingList() {
 
     async function fetchUserBookings() {
       try {
-        const response = await axios.get("/api/v1/users/" + userId);
+        const response = await axios.get("/api/v1/book/users/" + userId);
         const userBookings = response.data.userBookings;
         console.log(response.data.userBookings);
         console.log("User Bookings:", userBookings);
