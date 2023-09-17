@@ -3,6 +3,7 @@ export type IBOOK = {
     customerId : string,
     pickupDate : Date,
     pickupTime : string,
+    fullName : string,
     deliveryDate : Date,
     deliveryTime : string,
     location : string,

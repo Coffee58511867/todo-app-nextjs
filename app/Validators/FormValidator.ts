@@ -52,6 +52,46 @@ export const uploadError = {
      description : {
         required: "Body is required",
       },
+
+      //BOOKING FORM BELOW
+      
+      pickupDate : {
+        required: "Body is required",
+      },
+    pickupTime : {
+      required: "Body is required",
+    },
+
+
+    deliveryDate : {
+      required: "Body is required",
+    },
+
+   
+    deliveryTime : {
+      required: "Body is required",
+    },
+   
+    location : {
+      required: "Body is required",
+    },
+    laundryType : {
+      required: "Body is required",
+    },
+  
+    LaundryContainer :  {
+      required: "Body is required",
+    },
+    quantity :  {
+      required: "Body is required",
+    },
+   
+    laundryStatus :  {
+      required: "Body is required",
+    },
+    bookingStatus :  {
+      required: "Body is required",
+    },
   };
 
 
