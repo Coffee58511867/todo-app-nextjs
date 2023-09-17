@@ -5,7 +5,7 @@ export type IUserRegiter = {
     emailAddress: string;
     fullName : string;
     phoneNumber : string;
-    is_Admin : boolean;
+    is_admin : boolean;
     username : string;
     password: string;
   };

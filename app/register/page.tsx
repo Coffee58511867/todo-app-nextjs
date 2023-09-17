@@ -41,7 +41,7 @@ export default function Signup() {
        'emailAddress' : data.emailAddress,
        'fullName' : data.fullName,
        'password' : data.password,
-       'is_Admin' : false,
+       'is_admin' : false,
       };
       const response = await axios.post("/api/auth/register", userData);
       console.log(response.data);
