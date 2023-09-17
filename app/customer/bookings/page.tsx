@@ -4,7 +4,8 @@ import axios from "axios";
 import { useEffect } from "react";
 
 export default function BookingList(){
-    
+    const userId = localStorage.getItem("userId");
+
      useEffect(() => {
         async function fetchBooking(){
             await axios.get('/api/v1/book').then((response) => {
@@ -14,14 +15,15 @@ export default function BookingList(){
             })
         } 
         async function fetchUserBooking(){
-            await axios.get('/api/v1/book').then((response) => {
-                console.log(response.data.bookings);
+            await axios.get(`/api/v1/book/'${userId}`).then((response) => {
+                console.log("My Bookings " , response.data.bookings);
             }).catch((error) => {
                 console.log(error)
             })
         } 
 
         fetchBooking();
+        fetchUserBooking();
      })
     return(
         <>
