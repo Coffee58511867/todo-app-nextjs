@@ -89,11 +89,11 @@ export default function BookingList() {
           console.log(response.data.message);
 
           // Update the state with the updated data
-          setBooking((prevBooking) =>
-            prevBooking.map((item) =>
-              item._id === bookingId ? response.data.updatedBooking : item
-            )
-          );
+          // setBooking((prevBooking) =>
+          //   prevBooking.map((item) =>
+          //     item._id === bookingId ? response.data.updatedBooking : item
+          //   )
+          // );
 
           // Close the modal
           onClose();
@@ -139,9 +139,14 @@ export default function BookingList() {
   const onSubmit = async (data: IBOOK) => {
     try {
       console.log(data);
+      const updateData = {
+        newPhone : data.phoneNumber,
+        newName : data.fullName,
+        newLocation : data.location,
+      }
       const response = await axios.put(
         `/api/v1/book/${selectedItem?._id}`,
-        data,
+        updateData,
         {
           headers: {
             Accept: "application/json",
@@ -152,11 +157,11 @@ export default function BookingList() {
       );
 
       // Update the state with the updated data
-      setBooking((prevBooking) =>
-        prevBooking.map((item) =>
-          item._id === selectedItem?._id ? response.data.updatedBooking : item
-        )
-      );
+      // setBooking((prevBooking) =>
+      //   prevBooking.map((item) =>
+      //     item._id === selectedItem?._id ? response.data.updatedBooking : item
+      //   )
+      // );
 
       // Close the modal
       onClose();

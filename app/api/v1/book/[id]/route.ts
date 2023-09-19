@@ -7,7 +7,7 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   const { id } = params;
-  const { newName: fullName, newPhones: phoneNumber, newLocation : location } = await request.json();
+  const { newName: fullName, newPhone: phoneNumber, newLocation : location } = await request.json();
   await connectMongoDB();
   await book.findByIdAndUpdate(id, { fullName, phoneNumber, location });
   return NextResponse.json({ message: "Booking Update" }, { status: 200 });
