@@ -57,6 +57,31 @@ export default function BookingList() {
     router.push(`/customer/updatebooking/${itemId}`);
   };
 
+  const handleDelete = async (itemId : string) => {
+   try {
+    console.log(itemId);
+    await axios.delete(`/api/v1/book/${itemId}`).then((response) => {
+      console.log(response.data.message);
+    }).catch((error) => {
+      console.log(error)
+    })
+   } catch (error) {
+    console.log(error);
+   }
+  }
+
+   const handleDelete2 = async (itemId : string) => {
+    try {
+     console.log(itemId);
+     const response = await axios.delete(`api/v1/book/${itemId}`);
+       console.log(response);
+   
+    } catch (error) {
+     console.log(error);
+    }
+
+  }
+
   return (
     <>
       <Text fontSize={"3xl"} color={"gray.600"} p={9}>
@@ -89,6 +114,15 @@ export default function BookingList() {
                     size="sm"
                   >
                     Update
+                  </Button>
+                </Td>
+                <Td>
+                  <Button
+                    colorScheme="red"
+                    onClick={() => handleDelete(item._id)}
+                    size="sm"
+                  >
+                    Delete
                   </Button>
                 </Td>
             </Tbody>
