@@ -140,8 +140,8 @@ export default function BookingList() {
     try {
       console.log(data);
       const updateData = {
-        newPhone : data.phoneNumber,
         newName : data.fullName,
+        newPhone : data.phoneNumber,
         newLocation : data.location,
       }
       const response = await axios.put(
