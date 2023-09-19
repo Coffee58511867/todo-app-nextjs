@@ -203,7 +203,7 @@ export default function BookingList() {
           </Thead>
 
           {booking.map((item: IBOOK, index) => (
-            <Tbody key={item._id}>
+            <Tbody key={index}>
               <Td>{item?.fullName}</Td>
               <Td>{item?.pickupTime}</Td>
               <Td>{item?.deliveryTime}</Td>
