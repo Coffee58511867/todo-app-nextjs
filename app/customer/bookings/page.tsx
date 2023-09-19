@@ -28,6 +28,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { uploadError } from "@/app/Validators/FormValidator";
 
 export default function BookingList() {
   const userId = localStorage.getItem("userId");
@@ -143,6 +144,7 @@ export default function BookingList() {
         newPhone: data.phoneNumber,
         newLocation: data.location,
       };
+      console.log(updateData);
       const response = await axios.put(
         `/api/v1/book/${selectedItem?._id}`,
         updateData,
@@ -264,10 +266,10 @@ export default function BookingList() {
               <FormControl>
                 <FormLabel>First name {selectedItem?._id}</FormLabel>
                 <Input
-                  ref={initialRef}
                   placeholder="First name"
                   focusBorderColor="pink"
                   defaultValue={selectedItem?.fullName || ""}
+                  {...register("fullName", uploadError.fullName)}
                 />
               </FormControl>
 
@@ -277,6 +279,7 @@ export default function BookingList() {
                   placeholder="Last name"
                   focusBorderColor="pink"
                   defaultValue={selectedItem?.phoneNumber || ""}
+                  {...register("phoneNumber", uploadError.phoneNumber)}
                 />
               </FormControl>
               <FormControl mt={4}>
@@ -285,6 +288,7 @@ export default function BookingList() {
                   placeholder="Last name"
                   focusBorderColor="pink"
                   defaultValue={selectedItem?.location || ""}
+                  {...register("location", uploadError.location)}
                 />
               </FormControl>
               <FormControl mt={4}>
@@ -293,6 +297,7 @@ export default function BookingList() {
                   placeholder="Last name"
                   focusBorderColor="pink"
                   defaultValue={selectedItem?.pickupTime || ""}
+                  {...register("pickupTime", uploadError.pickupTime)}
                 />
               </FormControl>
             </ModalBody>
