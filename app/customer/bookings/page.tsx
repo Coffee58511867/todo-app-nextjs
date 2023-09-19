@@ -127,6 +127,16 @@ export default function BookingList() {
         }
       );
 
+      // Update the state with the updated data
+      setBooking((prevBooking) =>
+        prevBooking.map((item) =>
+          item._id === selectedItem?._id ? response.data.updatedBooking : item
+        )
+      );
+
+      // Close the modal
+      onClose();
+
       console.log(response.data);
       toast({
         title: "Booking updated Sucessfully",
