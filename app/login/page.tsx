@@ -97,6 +97,7 @@ export default function Signin() {
                   </InputLeftElement>
                   <Input
                     type="email"
+                    focusBorderColor="pink"
                     placeholder="Email address"
                     {...register("emailAddress", uploadError.emailAddress)}
                   />
@@ -114,6 +115,7 @@ export default function Signin() {
                   <Input
                     type="password"
                     placeholder="Password"
+                    focusBorderColor="pink"
                     {...register("password", uploadError.loginpassword)}
                   />
                 </InputGroup>

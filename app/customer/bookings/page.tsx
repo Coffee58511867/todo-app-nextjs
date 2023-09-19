@@ -223,6 +223,7 @@ export default function BookingList() {
                 <Input
                   ref={initialRef}
                   placeholder="First name"
+                  focusBorderColor="pink"
                   defaultValue={selectedItem?.fullName || ""}
                 />
               </FormControl>
@@ -231,6 +232,7 @@ export default function BookingList() {
                 <FormLabel>Contact NO.</FormLabel>
                 <Input
                   placeholder="Last name"
+                  focusBorderColor="pink"
                   defaultValue={selectedItem?.phoneNumber || ""}
                 />
               </FormControl>
@@ -238,6 +240,7 @@ export default function BookingList() {
                 <FormLabel>Address.</FormLabel>
                 <Input
                   placeholder="Last name"
+                  focusBorderColor="pink"
                   defaultValue={selectedItem?.location || ""}
                 />
               </FormControl>
@@ -245,6 +248,7 @@ export default function BookingList() {
                 <FormLabel>Pick up Time</FormLabel>
                 <Input
                   placeholder="Last name"
+                  focusBorderColor="pink"
                   defaultValue={selectedItem?.pickupTime || ""}
                 />
               </FormControl>
