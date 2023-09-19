@@ -19,5 +19,11 @@ export async function GET(request: Request,{ params }:  { params: { id: string }
     const Bookings = await book.findById({_id : id});
     return NextResponse.json({Bookings}, {status: 200})
 }
+export async function DELETE(request: Request, { params }:  { params: { id: string } } ) {
+  const { id } = params;
+  await connectMongoDB();
+  await book.findByIdAndDelete(id);
+  return NextResponse.json({ message: "Booking Deleted" }, { status: 200 });
+}
 
 
