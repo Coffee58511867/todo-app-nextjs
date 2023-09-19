@@ -138,12 +138,11 @@ export default function BookingList() {
 
   const onSubmit = async (data: IBOOK) => {
     try {
-      console.log(data);
       const updateData = {
-        newName : data.fullName,
-        newPhone : data.phoneNumber,
-        newLocation : data.location,
-      }
+        newName: data.fullName,
+        newPhone: data.phoneNumber,
+        newLocation: data.location,
+      };
       const response = await axios.put(
         `/api/v1/book/${selectedItem?._id}`,
         updateData,
@@ -162,6 +161,11 @@ export default function BookingList() {
       //     item._id === selectedItem?._id ? response.data.updatedBooking : item
       //   )
       // );
+      setBooking((prevBookings) =>
+        prevBookings.map((item) =>
+          item._id === selectedItem?._id ? { ...item, ...updateData } : item
+        )
+      );
 
       // Close the modal
       onClose();
