@@ -289,7 +289,7 @@ export default function BookingList() {
             </ModalBody>
 
             <ModalFooter>
-              <Button colorScheme="blue" mr={3} type="submit">
+              <Button colorScheme="pink" mr={3} type="submit">
                 Save
               </Button>
               <Button onClick={onClose}>Cancel</Button>
