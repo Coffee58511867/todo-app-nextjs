@@ -52,7 +52,7 @@ export default function BookingList() {
       await axios
         .get("/api/v1/book")
         .then((response) => {
-          console.log(response.data.bookings);
+          // console.log(response.data.bookings);
         })
         .catch((error) => {
           console.log(error);
@@ -63,8 +63,8 @@ export default function BookingList() {
       try {
         const response = await axios.get("/api/v1/book/users/" + userId);
         const userBookings = response.data.userBookings;
-        console.log(response.data.userBookings);
-        console.log("User Bookings:", userBookings);
+        // console.log(response.data.userBookings);
+        // console.log("User Bookings:", userBookings);
         setBooking(response.data.userBookings);
         // Handle the user bookings data here
       } catch (error) {
@@ -83,7 +83,6 @@ export default function BookingList() {
 
   const handleDelete = async (bookingId: string) => {
     try {
-      console.log(bookingId);
       await axios
         .delete(`/api/v1/book/${bookingId}`)
         .then((response) => {
@@ -92,9 +91,7 @@ export default function BookingList() {
           // Update the state with the updated data
           setBooking((prevBooking) =>
             prevBooking.map((item) =>
-              item._id === selectedItem?._id
-                ? response.data.updatedBooking
-                : item
+              item._id === bookingId ? response.data.updatedBooking : item
             )
           );
 
