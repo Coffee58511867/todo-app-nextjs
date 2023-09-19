@@ -2,6 +2,16 @@
 import IBOOK from "@/app/models/book.type";
 import {
   Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Table,
   TableContainer,
   Tbody,
@@ -10,16 +20,22 @@ import {
   Th,
   Thead,
   Tr,
+  useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import React from "react";
 
 export default function BookingList() {
   const userId = localStorage.getItem("userId");
   console.log(userId);
   const [booking, setBooking] = useState<IBOOK[]>([]);
   const router= useRouter();
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const initialRef = React.useRef(null)
+  const finalRef = React.useRef(null)
 
   useEffect(() => {
     async function fetchBooking() {
@@ -57,10 +73,10 @@ export default function BookingList() {
     router.push(`/customer/updatebooking/${itemId}`);
   };
 
-  const handleDelete = async (itemId : string) => {
+  const handleDelete = async (bookingId : string) => {
    try {
-    console.log(itemId);
-    await axios.delete(`/api/v1/book/${itemId}`).then((response) => {
+    console.log(bookingId);
+    await axios.delete(`/api/v1/book/${bookingId}`).then((response) => {
       console.log(response.data.message);
     }).catch((error) => {
       console.log(error)
@@ -129,6 +145,40 @@ export default function BookingList() {
           ))}
         </Table>
       </TableContainer>
+
+      <form>
+      <Modal
+        initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Update my Booking</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <FormControl>
+              <FormLabel>First name</FormLabel>
+              <Input ref={initialRef} placeholder='First name' />
+            </FormControl>
+
+            <FormControl mt={4}>
+              <FormLabel>Last name</FormLabel>
+              <Input placeholder='Last name' />
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='blue' mr={3}>
+              Save
+            </Button>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      </form>
     </>
   );
 }
