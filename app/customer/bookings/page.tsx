@@ -88,9 +88,36 @@ export default function BookingList() {
         .delete(`/api/v1/book/${bookingId}`)
         .then((response) => {
           console.log(response.data.message);
+
+          // Update the state with the updated data
+          setBooking((prevBooking) =>
+            prevBooking.map((item) =>
+              item._id === selectedItem?._id
+                ? response.data.updatedBooking
+                : item
+            )
+          );
+
+          // Close the modal
+          onClose();
+
+          toast({
+            title: "Booking Deleted Sucessfully",
+            description: response.data.message,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
         })
         .catch((error) => {
           console.log(error);
+          toast({
+            title: "Booking Deleted failed",
+            description: error.response.data.message,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
         });
     } catch (error) {
       console.log(error);
@@ -177,11 +204,11 @@ export default function BookingList() {
 
           {booking.map((item: IBOOK, index) => (
             <Tbody key={item._id}>
-              <Td>{item.fullName}</Td>
-              <Td>{item.pickupTime}</Td>
-              <Td>{item.deliveryTime}</Td>
-              <Td>{item.phoneNumber}</Td>
-              <Td>{item.bookingStatus}</Td>
+              <Td>{item?.fullName}</Td>
+              <Td>{item?.pickupTime}</Td>
+              <Td>{item?.deliveryTime}</Td>
+              <Td>{item?.phoneNumber}</Td>
+              <Td>{item?.bookingStatus}</Td>
               <Td>
                 <Button
                   colorScheme="teal"
